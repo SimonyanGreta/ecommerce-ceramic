@@ -4,6 +4,17 @@ body {
   @apply bg-white text-gray-900;
 }
 
+@theme {
+  --color-background-dark: #70170f;
+  --color-primary: #b7410e;
+  /*--color-secondary: #FBF6F4;*/
+  --color-secondary: #2f4f6f;
+  --color-background-light: #FAF3E0;
+  --color-neutral: #e0e0e0;
+  --color-accent: #93160B;
+}
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
