@@ -11,7 +11,8 @@ body {
   --color-secondary: #2f4f6f;
   --color-background-light: #FAF3E0;
   --color-neutral: #e0e0e0;
-  --color-accent: #93160B;
+  /*--color-accent: #93160B;*/
+  --color-accent: #ffba00;
 }
 
 

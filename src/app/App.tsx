@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-background-dark text-neutral fixed top-0 left-0 right-0 z-50 p-4 shadow-md">
+      <header className="fixed text-accent font-bold top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-b p-4 border-white/20 shadow-sm">
         <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between">
           <Link to="/" className="text-xl font-bold tracking-wide">
             Nuard Ceramics
@@ -33,7 +33,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 pt-8">
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
