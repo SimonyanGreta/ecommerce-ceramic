@@ -4,6 +4,7 @@ import { About } from "../pages/About";
 import { Home } from "../pages/Home";
 import { Shop } from "../pages/Shop";
 import { Contact } from "../pages/Contact";
+import {CursorSepia} from "../components/CursorSepia";
 
 export default function App() {
   const { t } = useTranslation();
@@ -32,6 +33,8 @@ export default function App() {
           </nav>
         </div>
       </header>
+
+      <CursorSepia/>
 
       <main className="flex-1">
         <Routes>
