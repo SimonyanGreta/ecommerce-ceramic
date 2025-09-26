@@ -1,16 +1,19 @@
-import { ProductCard } from "../../../ui/components/ProductCard"
-import vaseImg from "../../../assets/images/vase.png"
-import plateImg from "../../../assets/images/plate.png"
-import cupImg from "../../../assets/images/cup.jpg"
+import { ProductCard } from "../../../ui/components/ProductCard";
+import vase0Img from "../../../assets/images/vase0.jpg";
+import plateImg from "../../../assets/images/plate3.png";
+import plate2Img from "../../../assets/images/plate4.png";
+import kettleImg from "../../../assets/images/kettle2.png";
+import cup2Img from "../../../assets/images/cup2.png";
+import ashtrayImg from "../../../assets/images/ashtray0.png";
 
 const products = [
-  { id: 1, name: "Vase Terra", img: vaseImg },
-  { id: 2, name: "Plate Azure", img: plateImg },
-  { id: 3, name: "Cup Plum", img: cupImg },
-  { id: 4, name: "Bowl Clay", img: vaseImg },
-  { id: 5, name: "Jar Midnight", img: plateImg },
-  { id: 6, name: "Teapot Ruby", img: cupImg },
-]
+  { id: 1, name: "Cup", img: cup2Img },
+  { id: 2, name: "Plate", img: plateImg },
+  { id: 3, name: "Plate", img: plate2Img },
+  { id: 4, name: "Ashtray", img: ashtrayImg },
+  { id: 5, name: "Vase", img: vase0Img },
+  { id: 5, name: "Kettle", img: kettleImg },
+];
 
 export const ProductGrid = () => {
   return (
@@ -21,5 +24,5 @@ export const ProductGrid = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};

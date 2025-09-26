@@ -9,12 +9,11 @@ body {
   --color-primary: #b7410e;
   /*--color-secondary: #FBF6F4;*/
   --color-secondary: #2f4f6f;
-  --color-background-light: #FAF3E0;
+  --color-background-light: #faf3e0;
   --color-neutral: #e0e0e0;
   /*--color-accent: #93160B;*/
   --color-accent: #ffba00;
 }
-
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -42,3 +41,82 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer utilities {
+  .btn-outer {
+    filter: drop-shadow(0 1px 0 #000) drop-shadow(-1px 0 0 #000)
+      drop-shadow(1px 0 0 #000) drop-shadow(0 -1px 0 #000)
+      drop-shadow(5px 5px 0 #000);
+    transition: filter 0.3s ease-in-out;
+  }
+
+  .btn-outer:hover {
+    filter: drop-shadow(0px 0px 0 #000);
+  }
+
+  .btn-middle {
+    @apply relative cursor-pointer font-mono font-semibold text-base transition-transform duration-300;
+  }
+
+  .btn-outer:hover .btn-middle {
+    transform: translate(5px, 5px);
+  }
+
+  .btn-inner {
+    background: linear-gradient(
+        to bottom,
+        #ffba00 33%,
+        #f2c94c 66%
+      )
+      50% 0% / 100% 400% no-repeat;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    position: relative;
+    transition:
+      color 0.3s ease-in-out,
+      background-position 0.3s ease-in-out;
+  }
+
+  .btn-inner::before,
+  .btn-inner::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 100%;
+    top: 0;
+    background: inherit;
+  }
+
+  .btn-inner::before {
+    left: calc(100% - 1px);
+    clip-path: polygon(
+      100% 0,
+      74% 28%,
+      100% 29%,
+      100% 70%,
+      84% 78%,
+      100% 100%,
+      0 100%,
+      0 0
+    );
+  }
+
+  .btn-inner::after {
+    left: calc(-1rem + 1px);
+    clip-path: polygon(
+      23% 19%,
+      0 0,
+      100% 0,
+      100% 100%,
+      0 100%,
+      29% 79%,
+      9% 80%,
+      0 33%
+    );
+  }
+
+  .btn-outer:hover .btn-inner {
+    color: #000;
+    background-position: 50% 100%;
+  }
+}
