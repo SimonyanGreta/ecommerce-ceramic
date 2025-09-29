@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="fixed text-accent font-bold top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-b p-4 border-white/20 shadow-sm">
+      <header className="fixed text-primary font-bold top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-b p-4 border-white/20 shadow-sm">
         <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between">
           <Link to="/" className="text-xl font-bold tracking-wide">
             Nuard Ceramics

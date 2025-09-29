@@ -1,35 +1,42 @@
 type ProductCardProps = {
-  name: string
-  img: string
-  price?: string
-}
+  name: string;
+  img: string;
+  price?: string;
+};
 
 export const ProductCard = ({ name, img, price }: ProductCardProps) => {
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
-      {/* Image with overlay */}
-      <div className="relative w-full h-80 flex items-center justify-center overflow-hidden group">
+    <div
+      className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col group"
+    >
+      <div className="relative w-full h-80 flex items-center justify-center overflow-hidden">
         <img
           src={img}
           alt={name}
-          className="h-full object-contain transform group-hover:scale-110 transition duration-500"
+          className="h-full object-contain transform group-hover:scale-105 transition duration-500"
         />
 
-        {/* Overlay button */}
-        <button className="btn-outer absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition duration-500">
-          <span className="btn-middle">
-            <span className="btn-inner">View Product</span>
-          </span>
-        </button>
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition duration-500"></div>
       </div>
 
-      {/* Info */}
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-4 flex justify-between items-center flex-1 gap-2">
         <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-        {price && <p className="text-primary font-medium mt-1">{price}</p>}
+
+        <button
+          className="
+            opacity-0 translate-y-4
+            group-hover:opacity-100 group-hover:translate-y-0
+            transition-all duration-500
+            px-4 py-2 rounded-lg font-semibold
+            text-shadow-lg
+            hover:text-primary hover:cursor-pointer
+          "
+        >
+          View more
+        </button>
+
+        {price && <p className="text-accent font-medium">{price}</p>}
       </div>
     </div>
   );
-}
-
-// сделать красивые карточки и создать минимальную шоп стр
+};
