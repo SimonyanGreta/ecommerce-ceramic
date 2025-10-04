@@ -1,4 +1,4 @@
-export const MapSection = () => {
+export const Map = () => {
   return (
     <section className="py-16 bg-gray-100">
       <h2 className="text-2xl font-bold text-center mb-6">Where to find us</h2>

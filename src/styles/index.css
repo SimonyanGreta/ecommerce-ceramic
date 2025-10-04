@@ -23,6 +23,7 @@ body {
 }
 
 @theme {
+  --color-main: #F2F1F0;
   --color-background-dark: #70170f;
   --color-primary: #b7410e;
   /*--color-secondary: #FBF6F4;*/
