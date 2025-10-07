@@ -1,9 +1,11 @@
 import { Map } from "../Map";
+import { Info } from "../Info";
 
 export const Footer = () => {
   return (
     <footer className="bg-neutral text-center py-4">
-      <Map/>
+      <Info />
+      <Map />
       <p>© {new Date().getFullYear()} Nuard Ceramics</p>
     </footer>
   );
