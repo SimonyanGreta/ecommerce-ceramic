@@ -12,7 +12,7 @@ const products = [
   { id: 3, name: "Plate", img: plate2Img, price: "$35" },
   { id: 4, name: "Sugar", img: sugarImg, price: "$15" },
   { id: 5, name: "Vase", img: vase0Img, price: "$25" },
-  { id: 5, name: "Kettle", img: kettleImg, price: "$65" },
+  { id: 6, name: "Kettle", img: kettleImg, price: "$65" },
 ];
 
 

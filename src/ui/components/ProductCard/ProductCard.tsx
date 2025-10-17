@@ -4,15 +4,17 @@ type ProductCardProps = {
   name: string;
   img: string;
   price?: string;
-  onViewMore?: () => void;
 };
 
 export const ProductCard = ({
   name,
   img,
   price,
-  onViewMore,
 }: ProductCardProps) => {
+  const onViewMore = () => {
+    // open detail page for specific card
+  };
+
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col group">
       <div
