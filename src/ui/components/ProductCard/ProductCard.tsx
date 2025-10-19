@@ -1,32 +1,30 @@
 import CartPlus from "../../../assets/icon/cart_plus.tsx";
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../../hooks/useCart';
+import type { Product } from '../../../types/product.ts';
+import { useCartDrawer } from '../../../hooks/useCartDrawer.ts';
 
-type ProductCardProps = {
-  name: string;
-  img: string;
-  price?: string;
-};
+type ProductCardProps = { product: Product };
 
-export const ProductCard = ({
-  name,
-  img,
-  price,
-}: ProductCardProps) => {
-  const onViewMore = () => {
-    // open detail page for specific card
-  };
+export const ProductCard = ({ product }: ProductCardProps) => {
+  const navigate = useNavigate();
+  const { add } = useCart();
+  const { openCart } = useCartDrawer();
+
+  const goToDetails = () => navigate(`/product/${product.slug}`);
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col group">
       <div
-        onClick={onViewMore}
+        onClick={goToDetails}
         className="
           relative w-full h-80 flex items-center justify-center overflow-hidden
           cursor-pointer
         "
       >
         <img
-          src={img}
-          alt={name}
+          src={product.image}
+          alt={product.name}
           className="h-full object-contain transform group-hover:scale-150 transition duration-500"
         />
         <div
@@ -48,11 +46,10 @@ export const ProductCard = ({
       </div>
 
       <div className="p-4 flex flex-col flex-1 justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
+        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
 
         <div className="flex items-center justify-between mt-auto">
-          {price && <p className="text-accent font-semibold text-lg">{price}</p>}
-
+          {product.price && <p className="text-accent font-semibold text-lg">{product.price} {product.currency}</p>}
           <button
             className="
               flex items-center justify-center
@@ -60,6 +57,10 @@ export const ProductCard = ({
               active:scale-95
             "
             aria-label="Добавить в корзину"
+            onClick={() => {
+              add(product, 1);
+              openCart();
+            }}
           >
             <CartPlus />
           </button>

@@ -7,7 +7,7 @@ import saryanImg from "../../../assets/images/saryan.webp";
 
 export const HeroSection = () => {
   return (
-    <section className="w-full h-screen grid grid-cols-3 grid-rows-3 gap-4 p-10">
+    <section className="w-full h-screen grid grid-cols-3 grid-rows-3 gap-4 px-10 pt-20 pb-16">
       <div className="bg-gray-200 rounded-lg overflow-hidden">
         <img src={vaseImg} alt="Vase" className="w-full h-full object-cover" />
       </div>
