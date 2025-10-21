@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { CartItem, Product } from "../types/product";
-import { CART_PERSIST_KEY } from "../constants/cart";
 
 type CartState = {
   items: Record<string, CartItem>; // productId => item
@@ -10,11 +9,6 @@ type CartState = {
   // служебное для будущей синхронизации
   pendingSync: boolean;
   version: number; // на будущее для миграций
-};
-
-type CartComputed = {
-  count: number; // суммарное кол-во
-  subtotal: number; // сумма без доставки/налогов
 };
 
 type CartActions = {
@@ -29,9 +23,11 @@ type CartActions = {
   markSync: (pending: boolean) => void;
 };
 
-type CartStore = CartState & CartComputed & CartActions;
+type CartStore = CartState & CartActions;
 
-const initialState: CartState = {
+const CART_PERSIST_KEY = "cart:v1";
+
+const initialState: Omit<CartStore, keyof CartActions> = {
   items: {},
   currency: "USD",
   updatedAt: null,
@@ -43,16 +39,6 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       ...initialState,
-
-      get count() {
-        return Object.values(get().items).reduce((s, it) => s + it.qty, 0);
-      },
-      get subtotal() {
-        return Object.values(get().items).reduce(
-          (s, it) => s + it.price * it.qty,
-          0,
-        );
-      },
 
       add: (product, qty = 1) => {
         set((state) => {
@@ -101,18 +87,19 @@ export const useCartStore = create<CartStore>()(
 
       clear: () => set({ ...initialState }),
 
+      // будущий API: заменить локальную корзину корзиной с сервера
       hydrateFromServer: (serverItems) => {
         const map: Record<string, CartItem> = {};
         for (const it of serverItems) map[it.productId] = it;
         set({ items: map, updatedAt: Date.now(), pendingSync: false });
       },
 
+      // будущий API: merge (сейчас политика: max qty)
       mergeFromServer: (serverItems) => {
         const current = get().items;
         const merged: Record<string, CartItem> = { ...current };
         for (const s of serverItems) {
           const local = merged[s.productId];
-          // политика: берём максимум qty (можно заменить на last-write-wins)
           merged[s.productId] = local
             ? { ...local, qty: Math.max(local.qty, s.qty) }
             : s;
@@ -133,10 +120,7 @@ export const useCartStore = create<CartStore>()(
         // pendingSync не сохраняем
       }),
       version: 1,
-      migrate: (persisted, version) => {
-        // сюда добавим миграции при изменении shape
-        return persisted as CartState;
-      },
+      migrate: (persisted) => persisted as CartState,
     },
   ),
 );

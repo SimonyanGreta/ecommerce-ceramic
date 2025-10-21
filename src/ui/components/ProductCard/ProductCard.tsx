@@ -2,14 +2,12 @@ import CartPlus from "../../../assets/icon/cart_plus.tsx";
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../../hooks/useCart';
 import type { Product } from '../../../types/product.ts';
-import { useCartDrawer } from '../../../hooks/useCartDrawer.ts';
 
 type ProductCardProps = { product: Product };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
   const { add } = useCart();
-  const { openCart } = useCartDrawer();
 
   const goToDetails = () => navigate(`/product/${product.slug}`);
 
@@ -59,7 +57,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             aria-label="Добавить в корзину"
             onClick={() => {
               add(product, 1);
-              openCart();
             }}
           >
             <CartPlus />

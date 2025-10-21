@@ -32,15 +32,15 @@ export const Header = () => {
           <button
             onClick={toggleCart}
             aria-label="Открыть корзину"
-            className="p-2 rounded hover:bg-gray-100 transition"
+            className="relative p-2 rounded"
           >
             <Cart />
+            {count > 0 && (
+              <span className="absolute -right-1 -top-1 px-1.5 py-0.5 text-[10px] rounded-full bg-primary text-white leading-none">
+                {count}
+              </span>
+            )}
           </button>
-          {count > 0 && ( // fix count logic
-            <span className="absolute -right-1 -top-1 px-1.5 py-0.5 text-[10px] rounded-full bg-black text-white font-medium leading-none">
-              {count}
-            </span>
-          )}
         </nav>
       </div>
     </header>
