@@ -4,5 +4,43 @@
     "shop": "Покупки",
     "about": "О нас",
     "contact": "Контакты"
+  },
+  "checkout": {
+    "title": "Оформление",
+    "shippingTitle": "Данные доставки",
+    "orderItemsTitle": "Состав заказа",
+    "summaryTitle": "Итого",
+    "emptyCart": "Корзина пустая.",
+    "placeOrder": "Оформить (макет)",
+    "placingOrder": "Оформляем...",
+    "successTitle": "Заказ отправлен",
+    "successText": "Мы получили заявку. Скоро свяжемся, чтобы уточнить детали.",
+
+    "fields": {
+      "fullName": "Имя и фамилия",
+      "email": "Email",
+      "phone": "Телефон",
+      "address": "Адрес",
+      "city": "Город",
+      "country": "Страна",
+      "notes": "Комментарий"
+    },
+
+    "errors": {
+      "cartEmpty": "Корзина пустая",
+      "fullName": "Имя обязательно",
+      "email": "Email обязателен",
+      "address": "Адрес обязателен"
+    },
+
+    "totals": {
+      "subtotal": "Подытог",
+      "shipping": "Доставка",
+      "total": "Итого"
+    },
+
+    "actions": {
+      "goShop": "В магазин"
+    }
   }
 }

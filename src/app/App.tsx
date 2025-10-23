@@ -5,6 +5,7 @@ import { Shop } from "../pages/Shop";
 import { Contact } from "../pages/Contact";
 import ProductDetails from "../pages/ProductDetails";
 import CheckoutPage from "../pages/CheckoutPage";
+import CheckoutSuccess from "../pages/CheckoutSuccess";
 import { CartDrawer } from "../features/cart/CartDrawer.tsx";
 import { CursorSepia } from "../components/CursorSepia";
 import { Footer } from "../ui/components/Footer";
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:slug" element={<ProductDetails />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
         </Routes>
       </main>
 

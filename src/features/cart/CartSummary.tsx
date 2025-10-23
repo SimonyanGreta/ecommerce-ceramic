@@ -1,16 +1,24 @@
 import { useCart } from "../../hooks/useCart";
 import { Link } from "react-router-dom";
 import { useCartDrawer } from "../../hooks/useCartDrawer.ts";
+import { useTranslation } from "react-i18next";
+import { formatMoney } from "../../helpers/money.ts";
 
 export const CartSummary = () => {
-  const { subtotal, count, clear } = useCart();
+  const { subtotal, count, items, clear } = useCart();
   const { closeCart } = useCartDrawer();
+
+  const { i18n } = useTranslation();
+  const currency = items[0]?.currency ?? "USD"; // пока просто так
 
   return (
     <div className="sticky bottom-0 bg-white/80 backdrop-blur pt-3 border-t border-black/10">
       <div className="flex items-center justify-between text-sm">
         <div className="opacity-70">Items: {count}</div>
-        <div className="font-semibold">Subtotal: {subtotal.toFixed(2)}</div>
+        <div className="font-semibold">
+          {" "}
+          Subtotal: {formatMoney(subtotal, currency, i18n.language)}
+        </div>
       </div>
 
       <div className="mt-3 flex gap-2">

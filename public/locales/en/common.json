@@ -4,5 +4,43 @@
     "shop": "Shop",
     "about": "About",
     "contact": "Contact"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingTitle": "Shipping details",
+    "orderItemsTitle": "Order items",
+    "summaryTitle": "Summary",
+    "emptyCart": "Your cart is empty.",
+    "placeOrder": "Place order (mock)",
+    "placingOrder": "Placing order...",
+    "successTitle": "Order placed",
+    "successText": "We received your request. We’ll contact you soon to confirm details.",
+
+    "fields": {
+      "fullName": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "country": "Country",
+      "notes": "Notes"
+    },
+
+    "errors": {
+      "cartEmpty": "Cart is empty",
+      "fullName": "Full name is required",
+      "email": "Email is required",
+      "address": "Address is required"
+    },
+
+    "totals": {
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total"
+    },
+
+    "actions": {
+      "goShop": "Go to shop"
+    }
   }
 }
