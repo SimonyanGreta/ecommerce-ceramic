@@ -1,0 +1,87 @@
+import { FormField } from "../../components/form/FormField.tsx";
+import { useTranslation } from "react-i18next";
+import type { CheckoutErrors, CheckoutForm } from "../../types/checkout.ts";
+
+type Props = {
+  form: CheckoutForm;
+  errors: CheckoutErrors;
+  setField: <K extends keyof CheckoutForm>(
+    key: K,
+    value: CheckoutForm[K],
+  ) => void;
+};
+
+export function ShippingForm({ form, errors, setField }: Props) {
+  const { t } = useTranslation();
+
+  return (
+    <div className="md:col-span-2 rounded-2xl border border-black/10 p-4 bg-white">
+      {errors.form && (
+        <div className="mb-4 rounded-xl border border-red-500/30 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {errors.form}
+        </div>
+      )}
+
+      <h2 className="font-medium mb-4">{t("checkout.shippingTitle")}</h2>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <FormField
+          label={t("checkout.fields.fullName")}
+          required
+          value={form.fullName}
+          onChange={(e) => setField("fullName", e.target.value)}
+          error={errors.fullName}
+        />
+
+        <FormField
+          label={t("checkout.fields.email")}
+          required
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          value={form.email}
+          onChange={(e) => setField("email", e.target.value)}
+          error={errors.email}
+        />
+
+        <FormField
+          label={t("checkout.fields.phone")}
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          value={form.phone}
+          onChange={(e) => setField("phone", e.target.value)}
+        />
+
+        <FormField
+          label={t("checkout.fields.address")}
+          required
+          value={form.address}
+          onChange={(e) => setField("address", e.target.value)}
+          error={errors.address}
+          className="sm:col-span-2"
+        />
+
+        <FormField
+          label={t("checkout.fields.city")}
+          value={form.city}
+          onChange={(e) => setField("city", e.target.value)}
+        />
+
+        <FormField
+          label={t("checkout.fields.country")}
+          value={form.country}
+          onChange={(e) => setField("country", e.target.value)}
+        />
+
+        <FormField
+          as="textarea"
+          label={t("checkout.fields.notes")}
+          value={form.notes}
+          onChange={(e) => setField("notes", e.target.value)}
+          className="sm:col-span-2"
+        />
+      </div>
+    </div>
+  );
+}
