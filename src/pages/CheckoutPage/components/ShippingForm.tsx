@@ -1,6 +1,6 @@
-import { FormField } from "../../components/form/FormField.tsx";
+import { FormField } from "../../../components/form/FormField.tsx";
 import { useTranslation } from "react-i18next";
-import type { CheckoutErrors, CheckoutForm } from "../../types/checkout.ts";
+import type { CheckoutErrors, CheckoutForm } from "../../../types/checkout.ts";
 
 type Props = {
   form: CheckoutForm;

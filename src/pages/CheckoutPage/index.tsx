@@ -2,9 +2,10 @@ import { useMemo, useState } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ShippingForm } from "./ShippingForm.tsx";
-import { OrderItems } from "./OrderItems.tsx";
-import { OrderSummary } from "./OrderSummary.tsx";
+import { ShippingForm } from "./components/ShippingForm.tsx";
+import { OrderItems } from "./components/OrderItems.tsx";
+import { OrderSummary } from "./components/OrderSummary.tsx";
+import { CartEmpty } from "./components/CartEmpty.tsx";
 import type { CheckoutErrors, CheckoutForm } from "../../types/checkout.ts";
 
 const initialForm: CheckoutForm = {
@@ -31,6 +32,10 @@ export default function CheckoutPage() {
   // мок-доставка: бесплатно от 100, иначе 12
   const shipping = useMemo(() => (subtotal >= 100 ? 0 : 12), [subtotal]);
   const total = subtotal + shipping;
+
+  if (items.length === 0) {
+    return <CartEmpty />;
+  }
 
   const setField = <K extends keyof CheckoutForm>(
     key: K,
@@ -78,7 +83,7 @@ export default function CheckoutPage() {
       <h1 className="text-xl font-semibold">{t("checkout.title")}</h1>
 
       <div className="mt-6 grid gap-6 md:grid-cols-3">
-        <ShippingForm form={form} errors={errors} setField={setField}/>
+        <ShippingForm form={form} errors={errors} setField={setField} />
 
         <div className="space-y-6">
           <OrderItems items={items} />

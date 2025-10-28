@@ -5,7 +5,7 @@ import { Shop } from "../pages/Shop";
 import { Contact } from "../pages/Contact";
 import ProductDetails from "../pages/ProductDetails";
 import CheckoutPage from "../pages/CheckoutPage";
-import CheckoutSuccess from "../pages/CheckoutSuccess";
+import { CheckoutSuccess } from "../pages/CheckoutResult";
 import { CartDrawer } from "../features/cart/CartDrawer.tsx";
 import { CursorSepia } from "../components/CursorSepia";
 import { Footer } from "../ui/components/Footer";

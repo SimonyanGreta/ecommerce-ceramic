@@ -1,4 +1,4 @@
-import { formatMoney, type MoneyCurrency } from "../../helpers/money";
+import { formatMoney, type MoneyCurrency } from "../../../helpers/money.ts";
 import { useTranslation } from "react-i18next";
 
 type Props = {

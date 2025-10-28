@@ -1,6 +1,6 @@
-import { formatMoney } from "../../helpers/money";
+import { formatMoney } from "../../../helpers/money.ts";
 import { useTranslation } from "react-i18next";
-import type { CartItem } from "../../types/product.ts";
+import type { CartItem } from "../../../types/product.ts";
 
 type Props = {
   items: CartItem[];
