@@ -16,12 +16,6 @@ export function ShippingForm({ form, errors, setField }: Props) {
 
   return (
     <div className="md:col-span-2 rounded-2xl border border-black/10 p-4 bg-white">
-      {errors.form && (
-        <div className="mb-4 rounded-xl border border-red-500/30 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {errors.form}
-        </div>
-      )}
-
       <h2 className="font-medium mb-4">{t("checkout.shippingTitle")}</h2>
 
       <div className="grid gap-3 sm:grid-cols-2">

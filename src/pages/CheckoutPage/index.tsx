@@ -51,11 +51,6 @@ export default function CheckoutPage() {
   const validate = (): CheckoutErrors => {
     const e: CheckoutErrors = {};
 
-    if (items.length === 0) {
-      e.form = t("checkout.errors.cartEmpty");
-      return e;
-    }
-
     if (!form.fullName.trim()) e.fullName = t("checkout.errors.fullName");
     if (!form.email.trim()) e.email = t("checkout.errors.email");
     if (!form.address.trim()) e.address = t("checkout.errors.address");

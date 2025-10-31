@@ -2,7 +2,7 @@ import { useCart } from "../../hooks/useCart";
 import { useCartDrawer } from "../../hooks/useCartDrawer";
 import { CartItem } from "./CartItem";
 import { CartSummary } from "./CartSummary";
-import { CartEmpty } from "./CartEmpty";
+import { CartDrawerEmpty } from "./CartDrawerEmpty.tsx";
 import { Drawer } from "../../ui/components/Drawer";
 
 export const CartDrawer: React.FC = () => {
@@ -18,7 +18,7 @@ export const CartDrawer: React.FC = () => {
       title="Cart"
     >
       {items.length === 0 ? (
-        <CartEmpty />
+        <CartDrawerEmpty />
       ) : (
         <>
           <div className="flex-1 overflow-y-auto space-y-3">

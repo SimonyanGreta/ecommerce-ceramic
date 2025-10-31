@@ -7,7 +7,7 @@ export function CartEmpty() {
 
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
-      <div className="w-full max-w-md rounded-2xl border border-black/10 p-8 bg-white text-center">
+      <div className="w-full max-w-md p-8 text-center">
         <div className="flex justify-center mb-6">
           <EmptyCart />
         </div>
