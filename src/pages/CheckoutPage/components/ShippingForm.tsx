@@ -5,13 +5,14 @@ import type { CheckoutErrors, CheckoutForm } from "../../../types/checkout.ts";
 type Props = {
   form: CheckoutForm;
   errors: CheckoutErrors;
+  placing: boolean;
   setField: <K extends keyof CheckoutForm>(
     key: K,
     value: CheckoutForm[K],
   ) => void;
 };
 
-export function ShippingForm({ form, errors, setField }: Props) {
+export function ShippingForm({ form, errors, placing, setField }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -25,6 +26,7 @@ export function ShippingForm({ form, errors, setField }: Props) {
           value={form.fullName}
           onChange={(e) => setField("fullName", e.target.value)}
           error={errors.fullName}
+          disabled={placing}
         />
 
         <FormField
@@ -36,6 +38,7 @@ export function ShippingForm({ form, errors, setField }: Props) {
           value={form.email}
           onChange={(e) => setField("email", e.target.value)}
           error={errors.email}
+          disabled={placing}
         />
 
         <FormField
@@ -45,6 +48,7 @@ export function ShippingForm({ form, errors, setField }: Props) {
           autoComplete="tel"
           value={form.phone}
           onChange={(e) => setField("phone", e.target.value)}
+          disabled={placing}
         />
 
         <FormField
@@ -54,18 +58,21 @@ export function ShippingForm({ form, errors, setField }: Props) {
           onChange={(e) => setField("address", e.target.value)}
           error={errors.address}
           className="sm:col-span-2"
+          disabled={placing}
         />
 
         <FormField
           label={t("checkout.fields.city")}
           value={form.city}
           onChange={(e) => setField("city", e.target.value)}
+          disabled={placing}
         />
 
         <FormField
           label={t("checkout.fields.country")}
           value={form.country}
           onChange={(e) => setField("country", e.target.value)}
+          disabled={placing}
         />
 
         <FormField
@@ -74,6 +81,7 @@ export function ShippingForm({ form, errors, setField }: Props) {
           value={form.notes}
           onChange={(e) => setField("notes", e.target.value)}
           className="sm:col-span-2"
+          disabled={placing}
         />
       </div>
     </div>

@@ -78,7 +78,12 @@ export default function CheckoutPage() {
       <h1 className="text-xl font-semibold">{t("checkout.title")}</h1>
 
       <div className="mt-6 grid gap-6 md:grid-cols-3">
-        <ShippingForm form={form} errors={errors} setField={setField} />
+        <ShippingForm
+          form={form}
+          errors={errors}
+          setField={setField}
+          placing={placing}
+        />
 
         <div className="space-y-6">
           <OrderItems items={items} />
