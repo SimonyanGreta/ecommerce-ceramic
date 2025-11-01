@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,8 @@ import { OrderItems } from "./components/OrderItems.tsx";
 import { OrderSummary } from "./components/OrderSummary.tsx";
 import { CartEmpty } from "./components/CartEmpty.tsx";
 import type { CheckoutErrors, CheckoutForm } from "../../types/checkout.ts";
+
+const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
 const initialForm: CheckoutForm = {
   fullName: "",
@@ -23,7 +25,26 @@ export default function CheckoutPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState<CheckoutForm>(initialForm);
+  const [form, setForm] = useState<CheckoutForm>(() => {
+    try {
+      const raw = localStorage.getItem(CHECKOUT_DRAFT_KEY);
+      if (!raw) return initialForm;
+      const parsed = JSON.parse(raw) as Partial<CheckoutForm>;
+      return { ...initialForm, ...parsed };
+    } catch {
+      return initialForm;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CHECKOUT_DRAFT_KEY, JSON.stringify(form));
+    } catch {
+      // ignore
+    }
+  }, [form]);
+
+
   const [errors, setErrors] = useState<CheckoutErrors>({});
   const [placing, setPlacing] = useState(false);
 
@@ -65,8 +86,9 @@ export default function CheckoutPage() {
 
     setPlacing(true);
     try {
-      await new Promise((r) => setTimeout(r, 600)); // mock
+      await new Promise((r) => setTimeout(r, 1000)); // mock
       clear();
+      localStorage.removeItem(CHECKOUT_DRAFT_KEY);
       navigate("/checkout/success", { replace: true });
     } finally {
       setPlacing(false);
