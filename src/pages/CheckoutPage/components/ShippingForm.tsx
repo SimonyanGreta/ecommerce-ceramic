@@ -43,6 +43,7 @@ export function ShippingForm({ form, errors, placing, setField }: Props) {
 
         <FormField
           label={t("checkout.fields.phone")}
+          required
           type="tel"
           inputMode="tel"
           autoComplete="tel"
@@ -63,15 +64,19 @@ export function ShippingForm({ form, errors, placing, setField }: Props) {
 
         <FormField
           label={t("checkout.fields.city")}
+          required
           value={form.city}
           onChange={(e) => setField("city", e.target.value)}
+          error={errors.city}
           disabled={placing}
         />
 
         <FormField
           label={t("checkout.fields.country")}
+          required
           value={form.country}
           onChange={(e) => setField("country", e.target.value)}
+          error={errors.country}
           disabled={placing}
         />
 

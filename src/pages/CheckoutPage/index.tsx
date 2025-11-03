@@ -69,12 +69,30 @@ export default function CheckoutPage() {
     });
   };
 
+  const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  const phoneDigits = (v: string) => v.replace(/[^\d]/g, "");
+
+  const isPhoneValid = (v: string) => {
+    const digits = phoneDigits(v);
+    return digits.length >= 8 && digits.length <= 15;
+  };
   const validate = (): CheckoutErrors => {
     const e: CheckoutErrors = {};
 
     if (!form.fullName.trim()) e.fullName = t("checkout.errors.fullName");
-    if (!form.email.trim()) e.email = t("checkout.errors.email");
+
+    const email = form.email.trim();
+    if (!email) e.email = t("checkout.errors.email");
+    else if (!isEmail(email)) e.email = t("checkout.errors.emailInvalid");
+
+    const phone = form.phone.trim();
+    if (phone && !isPhoneValid(phone)) {
+      e.phone = t("checkout.errors.phoneInvalid");
+    }
+
     if (!form.address.trim()) e.address = t("checkout.errors.address");
+    if (!form.city.trim()) e.city = t("checkout.errors.city");
+    if (!form.country.trim()) e.country = t("checkout.errors.country");
 
     return e;
   };
