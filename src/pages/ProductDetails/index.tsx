@@ -1,30 +1,46 @@
-import { useParams } from 'react-router-dom';
-import { useMemo } from 'react';
-import { useCart } from '../../hooks/useCart';
-import { useCartDrawer } from '../../hooks/useCartDrawer';
-import type { Product } from '../../types/product';
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useCart } from "../../hooks/useCart";
+import { useCartDrawer } from "../../hooks/useCartDrawer";
 
-// примитивный мок. Позже заменишь на fetch по slug
-import { MOCK_PRODUCTS } from '../../helpers/mocks';
+// мок. Позже заменишь на fetch
+import { useProduct } from "../../features/products/hooks/useProduct";
+import { QuantitySelector } from "../../ui/components/QuantitySelector";
 
 export default function ProductDetails() {
   const { slug } = useParams<{ slug: string }>();
   const { add } = useCart();
   const { openCart } = useCartDrawer();
+  const { product, loading, error } = useProduct(slug);
 
-  // находим товар по slug
-  const product = useMemo<Product | undefined>(
-    () => MOCK_PRODUCTS.find((p) => p.slug === slug),
-    [slug]
-  );
+  const [qty, setQty] = useState(1);
+
+  if (loading) {
+    return (
+      <div className="py-28 container mx-auto px-4 text-center opacity-70">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-28 container mx-auto px-4 text-center text-red-700">
+        {error}
+      </div>
+    );
+  }
 
   if (!product) {
-    return <div className="p-4 text-center text-gray-500">Product not found</div>;
+    return (
+      <div className="py-28 container mx-auto px-4 text-center opacity-70">
+        Product not found
+      </div>
+    );
   }
 
   return (
-    <div className="container mx-auto px-4 py-26 grid gap-10 md:grid-cols-2">
-      {/* левая часть — изображение */}
+    <div className="container mx-auto px-4 py-28 grid gap-10 md:grid-cols-2">
       <div className="rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
         <img
           src={product.image}
@@ -33,28 +49,27 @@ export default function ProductDetails() {
         />
       </div>
 
-      {/* правая часть — описание */}
       <div className="flex flex-col">
         <h1 className="text-3xl font-semibold">{product.name}</h1>
-        <p className="mt-2 text-gray-600">{product.description}</p>
+        <p className="mt-2 opacity-70">{product.description}</p>
         <div className="mt-4 text-xl font-medium">
           {product.price.toFixed(2)} {product.currency}
         </div>
 
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <div className="text-sm opacity-70">Quantity</div>
+          <QuantitySelector value={qty} onChange={setQty} min={1} max={99} />
+        </div>
+
         <button
           onClick={() => {
-            add(product, 1);
+            add(product, qty);
             openCart();
           }}
           className="mt-6 rounded-xl px-6 py-3 border border-black/10 hover:bg-black hover:text-white transition"
         >
           Add to cart
         </button>
-
-        <div className="mt-8 text-sm text-gray-500">
-          <p>Free worldwide shipping on orders over $100.</p>
-          <p>Secure payment via PayPal or credit card.</p>
-        </div>
       </div>
     </div>
   );
