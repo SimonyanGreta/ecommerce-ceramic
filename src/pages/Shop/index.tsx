@@ -2,8 +2,10 @@ import { useState } from "react";
 import { ProductCard } from "../../ui/components/ProductCard";
 import type { ProductsSort } from "../../services/products/products.api";
 import { useProducts } from "../../features/products/hooks/useProducts";
+import { useTranslation } from "react-i18next";
 
 export const Shop = () => {
+  const { t } = useTranslation();
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<ProductsSort>("featured");
 
@@ -16,7 +18,7 @@ export const Shop = () => {
 
   return (
     <div className="w-full py-24 px-10">
-      <h1 className="text-3xl font-bold mb-8 text-center">All Products</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">{t("shop.title")}</h1>
 
       <div className="container mx-auto mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <input
@@ -42,20 +44,23 @@ export const Shop = () => {
       <section className="container mx-auto">
         {loading && (
           <div className="text-center opacity-70 py-10">
-            Loading products...
+            {t("shop.loading")}
           </div>
         )}
 
         {!loading && error && (
           <div className="rounded-2xl border border-red-500/30 bg-red-50 px-4 py-3 text-sm text-red-700">
-            {error}
+            {t("shop.error")}
           </div>
         )}
 
         {!loading && !error && data && (
           <>
             <div className="mb-4 text-sm opacity-70">
-              Showing {data.items.length} of {data.total}
+              {t("shop.showing", {
+                count: data.items.length,
+                total: data.total,
+              })}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">

@@ -6,8 +6,10 @@ import { useCartDrawer } from "../../hooks/useCartDrawer";
 // мок. Позже заменишь на fetch
 import { useProduct } from "../../features/products/hooks/useProduct";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
+import { useTranslation } from "react-i18next";
 
 export default function ProductDetails() {
+  const { t } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { add } = useCart();
   const { openCart } = useCartDrawer();
@@ -18,7 +20,7 @@ export default function ProductDetails() {
   if (loading) {
     return (
       <div className="py-28 container mx-auto px-4 text-center opacity-70">
-        Loading...
+        {t("product.loading")}
       </div>
     );
   }
@@ -34,7 +36,7 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <div className="py-28 container mx-auto px-4 text-center opacity-70">
-        Product not found
+        {t("product.notFound")}
       </div>
     );
   }
@@ -57,7 +59,7 @@ export default function ProductDetails() {
         </div>
 
         <div className="mt-6 flex items-center justify-between gap-4">
-          <div className="text-sm opacity-70">Quantity</div>
+          <div className="text-sm opacity-70">{t("product.quantity")}</div>
           <QuantitySelector value={qty} onChange={setQty} min={1} max={99} />
         </div>
 
@@ -68,8 +70,12 @@ export default function ProductDetails() {
           }}
           className="mt-6 rounded-xl px-6 py-3 border border-black/10 hover:bg-black hover:text-white transition"
         >
-          Add to cart
+          {t("product.addToCart")}
         </button>
+        <div className="mt-8 text-sm opacity-70">
+          <p>{t("product.freeShipping")}</p>
+          <p>{t("product.securePayment")}</p>
+        </div>
       </div>
     </div>
   );

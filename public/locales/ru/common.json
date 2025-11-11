@@ -5,6 +5,28 @@
     "about": "О нас",
     "contact": "Контакты"
   },
+  "shop": {
+    "title": "Все товары",
+    "searchPlaceholder": "Поиск товаров...",
+    "sort": {
+      "featured": "Рекомендуемое",
+      "priceAsc": "Цена: по возрастанию",
+      "priceDesc": "Цена: по убыванию",
+      "nameAsc": "Название: А → Я",
+      "nameDesc": "Название: Я → А"
+    },
+    "loading": "Загружаем товары...",
+    "showing": "Показано {{count}} из {{total}}",
+    "error": "Не удалось загрузить товары"
+  },
+  "product": {
+    "loading": "Загрузка...",
+    "notFound": "Товар не найден",
+    "quantity": "Количество",
+    "addToCart": "В корзину",
+    "freeShipping": "Бесплатная доставка по миру при заказе от $100.",
+    "securePayment": "Безопасная оплата PayPal или картой."
+  },
   "checkout": {
     "title": "Оформление",
     "shippingTitle": "Данные доставки",
