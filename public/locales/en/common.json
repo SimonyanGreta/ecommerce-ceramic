@@ -27,6 +27,18 @@
     "freeShipping": "Free worldwide shipping on orders over $100.",
     "securePayment": "Secure payment via PayPal or credit card."
   },
+  "cart": {
+    "title": "Cart",
+    "empty": {
+      "title": "Your cart is empty",
+      "subtitle": "Add products to see them here"
+    },
+    "summary": {
+      "checkout": "Checkout",
+      "clear": "Clear",
+      "subtotal": "Subtotal"
+    }
+  },
   "checkout": {
     "title": "Checkout",
     "shippingTitle": "Shipping details",

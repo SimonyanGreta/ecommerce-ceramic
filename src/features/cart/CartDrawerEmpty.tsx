@@ -1,6 +1,12 @@
-export const CartDrawerEmpty = () => (
-  <div className="py-12 text-center opacity-70">
-    <div className="text-lg">Your cart is empty</div>
-    <div className="text-sm">Add products to see them here</div>
-  </div>
-);
+import { useTranslation } from "react-i18next";
+
+export const CartDrawerEmpty = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="py-12 text-center opacity-70">
+      <div className="text-lg">{t("cart.empty.title")}</div>
+      <div className="text-sm">{t("cart.empty.subtitle")}</div>
+    </div>
+  );
+};

@@ -4,8 +4,11 @@ import { CartItem } from "./CartItem";
 import { CartSummary } from "./CartSummary";
 import { CartDrawerEmpty } from "./CartDrawerEmpty.tsx";
 import { Drawer } from "../../ui/components/Drawer";
+import { useTranslation } from "react-i18next";
 
 export const CartDrawer: React.FC = () => {
+  const { t } = useTranslation();
+
   const { open, closeCart } = useCartDrawer();
   const { items } = useCart();
 
@@ -15,7 +18,7 @@ export const CartDrawer: React.FC = () => {
       onClose={closeCart}
       position="right"
       width="24rem"
-      title="Cart"
+      title={t("cart.title")}
     >
       {items.length === 0 ? (
         <CartDrawerEmpty />
