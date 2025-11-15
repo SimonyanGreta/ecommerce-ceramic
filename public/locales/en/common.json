@@ -39,6 +39,9 @@
       "subtotal": "Subtotal"
     }
   },
+  "common": {
+    "remove": "Remove"
+  },
   "checkout": {
     "title": "Checkout",
     "shippingTitle": "Shipping details",

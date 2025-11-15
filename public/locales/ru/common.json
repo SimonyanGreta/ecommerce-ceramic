@@ -39,6 +39,9 @@
       "subtotal": "Подытог"
     }
   },
+  "common": {
+    "remove": "Удалить"
+  },
   "checkout": {
     "title": "Оформление",
     "shippingTitle": "Данные доставки",
