@@ -1,13 +1,16 @@
 import CartPlus from "../../../assets/icon/cart_plus.tsx";
-import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../../hooks/useCart';
-import type { Product } from '../../../types/product.ts';
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../../../hooks/useCart";
+import type { Product } from "../../../types/product";
+import { useTranslation } from "react-i18next";
+import { formatMoney } from "../../../helpers/money";
 
 type ProductCardProps = { product: Product };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
   const { add } = useCart();
+  const { i18n, t } = useTranslation();
 
   const goToDetails = () => navigate(`/product/${product.slug}`);
 
@@ -39,7 +42,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             transition-all duration-500
           "
         >
-          View more
+          {t("product.viewMore")}
         </div>
       </div>
 
@@ -47,17 +50,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
 
         <div className="flex items-center justify-between mt-auto">
-          {product.price && <p className="text-accent font-semibold text-lg">{product.price} {product.currency}</p>}
+          <p className="text-accent font-semibold text-lg">
+            {formatMoney(product.price, product.currency, i18n.language)}
+          </p>
+
           <button
-            className="
-              flex items-center justify-center
-              p-2 rounded-lg hover:bg-gray-100 transition
-              active:scale-95
-            "
-            aria-label="Добавить в корзину"
-            onClick={() => {
-              add(product, 1);
-            }}
+            className="flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition active:scale-95"
+            aria-label={t("product.addToCart")}
+            onClick={() => add(product, 1)}
           >
             <CartPlus />
           </button>

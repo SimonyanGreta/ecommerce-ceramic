@@ -7,9 +7,10 @@ import { useCartDrawer } from "../../hooks/useCartDrawer";
 import { useProduct } from "../../features/products/hooks/useProduct";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { useTranslation } from "react-i18next";
+import { formatMoney } from "../../helpers/money.ts";
 
 export default function ProductDetails() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { add } = useCart();
   const { openCart } = useCartDrawer();
@@ -55,7 +56,7 @@ export default function ProductDetails() {
         <h1 className="text-3xl font-semibold">{product.name}</h1>
         <p className="mt-2 opacity-70">{product.description}</p>
         <div className="mt-4 text-xl font-medium">
-          {product.price.toFixed(2)} {product.currency}
+          {formatMoney(product.price, product.currency, i18n.language)}
         </div>
 
         <div className="mt-6 flex items-center justify-between gap-4">
