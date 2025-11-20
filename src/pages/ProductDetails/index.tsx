@@ -8,6 +8,7 @@ import { useProduct } from "../../features/products/hooks/useProduct";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money.ts";
+import {ProductDetailsSkeleton} from "../../ui/components/ProductDetailsSkeleton";
 
 export default function ProductDetails() {
   const { t, i18n } = useTranslation();
@@ -19,11 +20,7 @@ export default function ProductDetails() {
   const [qty, setQty] = useState(1);
 
   if (loading) {
-    return (
-      <div className="py-28 container mx-auto px-4 text-center opacity-70">
-        {t("product.loading")}
-      </div>
-    );
+    return <ProductDetailsSkeleton />;
   }
 
   if (error) {

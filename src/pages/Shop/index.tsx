@@ -3,6 +3,7 @@ import { ProductCard } from "../../ui/components/ProductCard";
 import type { ProductsSort } from "../../services/products/products.api";
 import { useProducts } from "../../features/products/hooks/useProducts";
 import { useTranslation } from "react-i18next";
+import { ProductCardSkeleton } from "../../ui/components/ProductCardSkeleton";
 
 export const Shop = () => {
   const { t } = useTranslation();
@@ -43,8 +44,10 @@ export const Shop = () => {
 
       <section className="container mx-auto">
         {loading && (
-          <div className="text-center opacity-70 py-10">
-            {t("shop.loading")}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {Array.from({ length: 8 }).map((_, idx) => (
+              <ProductCardSkeleton key={idx} />
+            ))}
           </div>
         )}
 
