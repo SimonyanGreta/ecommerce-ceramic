@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProductCard } from "../../ui/components/ProductCard";
 import type { ProductsSort } from "../../services/products/products.api";
 import { useProducts } from "../../features/products/hooks/useProducts";
 import { useTranslation } from "react-i18next";
 import { ProductCardSkeleton } from "../../ui/components/ProductCardSkeleton";
+import { Pagination } from "../../ui/components/Pagination";
 
 export const Shop = () => {
   const { t } = useTranslation();
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<ProductsSort>("featured");
+  const [page, setPage] = useState(1);
+  const pageSize = 12;
+
+  useEffect(() => {
+    setPage(1);
+  }, [q, sort]);
 
   const { data, loading, error } = useProducts({
     q,
     sort,
-    page: 1,
-    pageSize: 24,
+    page,
+    pageSize,
   });
 
   return (
@@ -71,6 +78,16 @@ export const Shop = () => {
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+
+            {data.total > data.pageSize && (
+              <Pagination
+                className="mt-10"
+                page={data.page}
+                pageSize={data.pageSize}
+                total={data.total}
+                onPageChange={setPage}
+              />
+            )}
           </>
         )}
       </section>
