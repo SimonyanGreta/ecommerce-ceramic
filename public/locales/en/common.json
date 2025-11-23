@@ -17,7 +17,14 @@
     },
     "loading": "Loading products...",
     "showing": "Showing {{count}} of {{total}}",
-    "error": "Failed to load products"
+    "error": "Failed to load products",
+    "empty": {
+      "title": "No products found",
+      "subtitle": "Try changing the search or filters"
+    },
+    "actions": {
+      "reset": "Reset"
+    }
   },
   "product": {
     "viewMore": "View more",

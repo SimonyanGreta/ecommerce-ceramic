@@ -66,7 +66,7 @@ export default function ProductDetails() {
             add(product, qty);
             openCart();
           }}
-          className="mt-6 rounded-xl px-6 py-3 border border-black/10 hover:bg-black hover:text-white transition"
+          className="mt-6 rounded-xl px-6 py-3 border border-black/10 hover:bg-primary hover:text-white transition"
         >
           {t("product.addToCart")}
         </button>
