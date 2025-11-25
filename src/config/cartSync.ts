@@ -6,7 +6,7 @@ export function initCartSync() {
   // подписка на изменения items/pendingSync
   useCartStore.subscribe(
     (s) => ({ items: s.items, pendingSync: s.pendingSync }),
-    (slice, prev) => {
+    (slice, _prev) => {
       // чтобы не дергать по пустякам — синкаем только если pendingSync true
       if (!slice.pendingSync) return;
 
