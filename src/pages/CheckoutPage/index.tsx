@@ -2,11 +2,13 @@ import { useMemo, useState, useEffect } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ShippingForm } from "./components/ShippingForm.tsx";
-import { OrderItems } from "./components/OrderItems.tsx";
-import { OrderSummary } from "./components/OrderSummary.tsx";
-import { CartEmpty } from "./components/CartEmpty.tsx";
-import type { CheckoutErrors, CheckoutForm } from "../../types/checkout.ts";
+import { ShippingForm } from "./components/ShippingForm";
+import { OrderItems } from "./components/OrderItems";
+import { OrderSummary } from "./components/OrderSummary";
+import { CartEmpty } from "./components/CartEmpty";
+
+import type { CheckoutErrors, CheckoutForm } from "../../types/checkout";
+import { calcOrderTotals } from "../../helpers/checkout";
 
 const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
@@ -44,15 +46,15 @@ export default function CheckoutPage() {
     }
   }, [form]);
 
-
   const [errors, setErrors] = useState<CheckoutErrors>({});
   const [placing, setPlacing] = useState(false);
 
   const currency = items[0]?.currency ?? "USD";
 
-  // мок-доставка: бесплатно от 100, иначе 12
-  const shipping = useMemo(() => (subtotal >= 100 ? 0 : 12), [subtotal]);
-  const total = subtotal + shipping;
+  const { shipping, total } = useMemo(
+    () => calcOrderTotals({ subtotal, currency, country: form.country }),
+    [subtotal, currency, form.country],
+  );
 
   if (items.length === 0) {
     return <CartEmpty />;
