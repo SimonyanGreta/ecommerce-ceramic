@@ -60,7 +60,7 @@
     "placingOrder": "Placing order...",
     "successTitle": "Order placed",
     "successText": "We received your request. We’ll contact you soon to confirm details.",
-
+    "orderId": "Order ID:",
     "fields": {
       "fullName": "Full name",
       "email": "Email",

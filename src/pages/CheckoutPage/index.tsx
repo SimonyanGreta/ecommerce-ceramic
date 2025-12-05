@@ -10,6 +10,9 @@ import { CartEmpty } from "./components/CartEmpty";
 import type { CheckoutErrors, CheckoutForm } from "../../types/checkout";
 import { calcOrderTotals } from "../../helpers/checkout";
 
+import { ordersApi } from "../../services/orders";
+import type { CreateOrderPayload } from "../../types/order";
+
 const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
 const initialForm: CheckoutForm = {
@@ -86,12 +89,42 @@ export default function CheckoutPage() {
     setErrors(e);
     if (Object.keys(e).length > 0) return;
 
+    const payload: CreateOrderPayload = {
+      customer: {
+        fullName: form.fullName.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        address: form.address.trim(),
+        city: form.city.trim(),
+        country: form.country.trim(),
+        notes: form.notes.trim() ? form.notes.trim() : undefined,
+      },
+      items: items.map((it) => ({
+        productId: it.productId,
+        qty: it.qty,
+        price: it.price,
+      })),
+      subtotal,
+      shipping,
+      total,
+      currency,
+    };
+
     setPlacing(true);
     try {
-      await new Promise((r) => setTimeout(r, 1000)); // mock
+      const { orderId } = await ordersApi.createOrder(payload);
+
       clear();
       localStorage.removeItem(CHECKOUT_DRAFT_KEY);
-      navigate("/checkout/success", { replace: true });
+
+      navigate(`/checkout/success?orderId=${encodeURIComponent(orderId)}`, {
+        replace: true,
+      });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      alert(msg);
+      // TODO сделать правильную обработку после подключения бекенда
+      // setErrors({ form: msg || t("checkout.errors.orderFailed") });
     } finally {
       setPlacing(false);
     }
