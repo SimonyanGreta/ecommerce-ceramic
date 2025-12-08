@@ -2,6 +2,6 @@ import { ordersApiMock } from "./orders.mock";
 import { ordersApiHttp } from "./orders.http";
 import type { OrdersApi } from "./orders.api";
 
-const USE_HTTP = false;
+const USE_API = import.meta.env.VITE_USE_API === "true";
 
-export const ordersApi: OrdersApi = USE_HTTP ? ordersApiHttp : ordersApiMock;
+export const ordersApi: OrdersApi = USE_API ? ordersApiHttp : ordersApiMock;

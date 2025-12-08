@@ -4,8 +4,9 @@ import type {
   ProductsListResponse,
 } from "./products.api";
 import type { Product } from "../../types/product";
+import { apiFetch } from "../http";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
 function qs(params?: ProductsListParams) {
   const sp = new URLSearchParams();
@@ -20,31 +21,19 @@ function qs(params?: ProductsListParams) {
   return s ? `?${s}` : "";
 }
 
-async function parseJson<T>(res: Response): Promise<T> {
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`HTTP ${res.status}: ${text || res.statusText}`);
-  }
-  return (await res.json()) as T;
-}
-
 export const productsApiHttp: ProductsApi = {
   list: async (params): Promise<ProductsListResponse> => {
-    const res = await fetch(`${API_BASE}/products${qs(params)}`, {
+    return apiFetch<ProductsListResponse>(`${API_BASE}/products${qs(params)}`, {
       method: "GET",
-      headers: { Accept: "application/json" },
     });
-    return parseJson<ProductsListResponse>(res);
   },
 
   getBySlug: async (slug: string): Promise<Product | null> => {
-    const res = await fetch(
+    return apiFetch<Product>(
       `${API_BASE}/products/${encodeURIComponent(slug)}`,
       {
         method: "GET",
-        headers: { Accept: "application/json" },
       },
     );
-    return parseJson<Product>(res);
   },
 };

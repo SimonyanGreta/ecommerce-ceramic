@@ -1,6 +1,9 @@
 import { productsApiMock } from "./products.mock";
-// потом просто ->> на productsApiHttp
-// import { productsApiHttp } from "./products.http";
+import { productsApiHttp } from "./products.http";
+import type { ProductsApi } from "./products.api";
 
-export const productsApi = productsApiMock;
-// export const productsApi = productsApiHttp;
+const USE_API = import.meta.env.VITE_USE_API === "true";
+
+export const productsApi: ProductsApi = USE_API
+  ? productsApiHttp
+  : productsApiMock;
