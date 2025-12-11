@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import EmptyCart from "../../../assets/icon/cart_empty.tsx";
+import { ButtonLink } from "../../../ui/components/Button";
 
 export function CartEmpty() {
   const { t } = useTranslation();
@@ -14,12 +14,9 @@ export function CartEmpty() {
 
         <p className="text-lg font-semibold">{t("checkout.emptyCart")}</p>
 
-        <Link
-          to="/shop"
-          className="mt-6 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 border border-black/10 bg-primary hover:bg-background-dark text-white transition"
-        >
+        <ButtonLink to="/shop" variant="primary" fullWidth className="mt-4">
           {t("checkout.actions.goShop")}
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

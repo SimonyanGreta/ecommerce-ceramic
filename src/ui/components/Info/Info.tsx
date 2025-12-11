@@ -1,4 +1,5 @@
 import Instagram from "../../../assets/icon/Instagram.tsx";
+import { Button } from "../Button";
 
 export const Info = () => {
   return (
@@ -57,13 +58,14 @@ export const Info = () => {
               className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 placeholder-gray-400 focus:ring-2 focus:ring-primary outline-none transition"
             />
           </div>
-
-          <button
+          <Button
             type="submit"
-            className="w-full py-2 rounded-lg font-semibold bg-primary hover:bg-accent transition"
+            variant="primary"
+            size="md"
+            aria-label="Send Message"
           >
             Send Message
-          </button>
+          </Button>
         </form>
       </div>
     </div>

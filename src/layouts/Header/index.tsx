@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useCartDrawer } from "../../hooks/useCartDrawer.ts";
-import { useCart } from "../../hooks/useCart.ts";
+import { useCartDrawer } from "../../hooks/useCartDrawer";
+import { useCart } from "../../hooks/useCart";
+import { Button } from "../../ui/components/Button";
 import Cart from "../../assets/icon/cart";
 
 export const Header = () => {
@@ -29,9 +30,11 @@ export const Header = () => {
           <Link to="/contact" className="hover:text-primary">
             {t("nav.contact")}
           </Link>
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={toggleCart}
-            aria-label="Открыть корзину"
+            aria-label="open cart"
             className="relative p-2 rounded"
           >
             <Cart />
@@ -40,7 +43,7 @@ export const Header = () => {
                 {count}
               </span>
             )}
-          </button>
+          </Button>
         </nav>
       </div>
     </header>

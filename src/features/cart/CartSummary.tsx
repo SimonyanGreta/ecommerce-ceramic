@@ -1,9 +1,9 @@
 import { useCart } from "../../hooks/useCart";
-import { Link } from "react-router-dom";
 import { useCartDrawer } from "../../hooks/useCartDrawer";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money";
 import { useCartStore } from "../../stores/cart.store";
+import { Button, ButtonLink } from "../../ui/components/Button";
 
 export const CartSummary = () => {
   const { subtotal, count, clear } = useCart();
@@ -11,7 +11,6 @@ export const CartSummary = () => {
   const { t, i18n } = useTranslation();
 
   const currency = useCartStore((s) => s.currency);
-  const hasItems = count > 0;
 
   return (
     <div className="sticky bottom-0 bg-white/80 backdrop-blur pt-3 border-t border-black/10">
@@ -25,25 +24,19 @@ export const CartSummary = () => {
       </div>
 
       <div className="mt-3 flex gap-2">
-        <Link
+        <ButtonLink
           to="/checkout"
-          className={`flex-1 inline-flex items-center justify-center rounded-xl px-4 py-2 border border-black/10 transition ${
-            hasItems
-              ? "hover:bg-primary hover:text-white"
-              : "pointer-events-none opacity-50"
-          }`}
-          onClick={() => hasItems && closeCart()}
+          variant="secondary"
+          size="md"
+          fullWidth
+          onClick={closeCart}
         >
           {t("cart.summary.checkout")}
-        </Link>
+        </ButtonLink>
 
-        <button
-          className="px-4 py-2 rounded-xl border border-black/10 hover:border-red-500 hover:text-red-600"
-          onClick={clear}
-          disabled={!hasItems}
-        >
+        <Button variant="danger" size="md" onClick={clear}>
           {t("cart.summary.clear")}
-        </button>
+        </Button>
       </div>
     </div>
   );

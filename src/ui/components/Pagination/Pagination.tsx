@@ -1,6 +1,7 @@
 import React from "react";
 import Left from "../../../assets/icon/left";
 import Right from "../../../assets/icon/right";
+import { Button } from "../Button";
 
 type Props = {
   page: number;
@@ -25,37 +26,33 @@ export const Pagination: React.FC<Props> = ({
     <div
       className={`flex items-center justify-center gap-6 ${className ?? ""}`}
     >
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         disabled={!canPrev}
         onClick={() => onPageChange(page - 1)}
         aria-label="Previous page"
-        className={`
-          h-8 w-8 inline-flex items-center justify-center
-          ${canPrev ? "hover:cursor-pointer active:scale-95" : "opacity-40 cursor-not-allowed"}
-        `}
+        className="h-10 w-10 p-0"
       >
         <Left />
-      </button>
+      </Button>
 
-      <div className="text-sm font-medium tracking-wide">
-        <span className="text-base font-semibold">{page}</span>
+      <div className="text-base font-medium tracking-wide">
+        <span className="text-lg font-semibold">{page}</span>
         <span className="opacity-50 mx-1">/</span>
         <span className="opacity-70">{totalPages}</span>
       </div>
 
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         disabled={!canNext}
         onClick={() => onPageChange(page + 1)}
         aria-label="Next page"
-        className={`
-          h-8 w-8 inline-flex items-center justify-center
-          ${canNext ? "hover:cursor-pointer active:scale-95" : "opacity-40 cursor-not-allowed"}
-        `}
+        className="h-10 w-10 p-0"
       >
         <Right />
-      </button>
+      </Button>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { memo } from "react";
 import { useCart } from "../../hooks/useCart";
 import type { CartItem as TCartItem } from "../../types/product";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
+import { Button } from "../../ui/components/Button";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money";
 
@@ -32,13 +33,15 @@ export const CartItem = memo(({ item }: Props) => {
             max={99}
             onChange={(next) => setQty(item.productId, next)}
           />
-
-          <button
-            className="ml-auto text-xs opacity-70 hover:opacity-100"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => remove(item.productId)}
+            aria-label="remove"
+            className="ml-auto"
           >
             {t("common.remove", "Remove")}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

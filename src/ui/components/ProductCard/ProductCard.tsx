@@ -1,27 +1,26 @@
-import CartPlus from "../../../assets/icon/cart_plus.tsx";
-import { useNavigate } from "react-router-dom";
+import CartPlus from "../../../assets/icon/cart_plus";
+import { Link } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
 import type { Product } from "../../../types/product";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../../helpers/money";
+import { Button } from "../Button";
 
 type ProductCardProps = { product: Product };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const navigate = useNavigate();
   const { add } = useCart();
   const { i18n, t } = useTranslation();
 
-  const goToDetails = () => navigate(`/product/${product.slug}`);
-
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col group">
-      <div
-        onClick={goToDetails}
+      <Link
+        to={`/product/${product.slug}`}
         className="
           relative w-full h-80 flex items-center justify-center overflow-hidden
           cursor-pointer
         "
+        aria-label={t("product.viewMore")}
       >
         <img
           src={product.image}
@@ -44,23 +43,24 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         >
           {t("product.viewMore")}
         </div>
-      </div>
+      </Link>
 
       <div className="p-4 flex flex-col flex-1 justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
+        <h3 className="text-lg font-semibold text-dark">{product.name}</h3>
 
         <div className="flex items-center justify-between mt-auto">
           <p className="text-accent font-semibold text-lg">
             {formatMoney(product.price, product.currency, i18n.language)}
           </p>
 
-          <button
-            className="flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition active:scale-95"
-            aria-label={t("product.addToCart")}
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label="Add to cart"
             onClick={() => add(product, 1)}
           >
             <CartPlus />
-          </button>
+          </Button>
         </div>
       </div>
     </div>

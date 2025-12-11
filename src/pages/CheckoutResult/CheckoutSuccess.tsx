@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { ButtonLink } from "../../ui/components/Button";
 
 export const CheckoutSuccess = () => {
   const { t } = useTranslation();
@@ -19,12 +20,15 @@ export const CheckoutSuccess = () => {
           </div>
         )}
 
-        <Link
+        <ButtonLink
           to="/shop"
-          className="mt-6 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 border border-black/10 bg-primary hover:bg-background-dark text-white transition"
+          variant="primary"
+          size="lg"
+          fullWidth
+          className="mt-6"
         >
           {t("checkout.actions.goShop")}
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

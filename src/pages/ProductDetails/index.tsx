@@ -8,7 +8,8 @@ import { useProduct } from "../../features/products/hooks/useProduct";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money.ts";
-import {ProductDetailsSkeleton} from "../../ui/components/ProductDetailsSkeleton";
+import { ProductDetailsSkeleton } from "../../ui/components/ProductDetailsSkeleton";
+import { Button } from "../../ui/components/Button";
 
 export default function ProductDetails() {
   const { t, i18n } = useTranslation();
@@ -45,7 +46,7 @@ export default function ProductDetails() {
         <img
           src={product.image}
           alt={product.name}
-          className="w-full max-h-[480px] object-contain"
+          className="w-full max-h-120 object-contain"
         />
       </div>
 
@@ -61,15 +62,18 @@ export default function ProductDetails() {
           <QuantitySelector value={qty} onChange={setQty} min={1} max={99} />
         </div>
 
-        <button
+        <Button
+          variant="outline"
+          size="md"
           onClick={() => {
             add(product, qty);
             openCart();
           }}
-          className="mt-6 rounded-xl px-6 py-3 border border-black/10 hover:bg-primary hover:text-white transition"
+          aria-label="Add to cart"
+          className="mt-8"
         >
           {t("product.addToCart")}
-        </button>
+        </Button>
         <div className="mt-8 text-sm opacity-70">
           <p>{t("product.freeShipping")}</p>
           <p>{t("product.securePayment")}</p>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CloseIcon from "../../../assets/icon/close.tsx";
+import { Button } from "../Button";
 
 export type DrawerPosition = "left" | "right" | "top" | "bottom";
 
@@ -91,12 +92,14 @@ export const Drawer: React.FC<DrawerProps> = ({
           >
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
               {title && <h2 className="text-lg font-semibold">{title}</h2>}
-              <button
+              <Button
+                variant="ghost"
+                size="md"
                 onClick={onClose}
-                className="p-2 rounded-md hover:bg-gray-100 transition"
+                aria-label="close"
               >
                 <CloseIcon />
-              </button>
+              </Button>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4">{children}</div>

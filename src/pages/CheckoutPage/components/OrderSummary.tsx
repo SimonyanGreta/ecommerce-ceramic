@@ -1,5 +1,6 @@
 import { formatMoney, type MoneyCurrency } from "../../../helpers/money.ts";
 import { useTranslation } from "react-i18next";
+import { Button } from "../../../ui/components/Button";
 
 type Props = {
   subtotal: number;
@@ -46,14 +47,15 @@ export function OrderSummary({
           </span>
         </div>
       </div>
-
-      <button
-        disabled={placing}
+      <Button
+        variant="outline"
+        fullWidth
+        loading={placing}
         onClick={onPlaceOrder}
-        className="w-full mt-4 rounded-xl px-4 py-3 border border-black/10 hover:bg-black hover:text-white transition disabled:opacity-60"
+        className="mt-4"
       >
         {placing ? t("checkout.placingOrder") : t("checkout.placeOrder")}
-      </button>
+      </Button>
     </div>
   );
 }

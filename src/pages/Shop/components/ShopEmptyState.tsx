@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Button } from "../../../ui/components/Button";
 
 type Props = {
   onReset: () => void;
@@ -12,13 +13,15 @@ export const ShopEmptyState = ({ onReset }: Props) => {
       <div className="text-lg font-semibold">{t("shop.empty.title")}</div>
       <div className="mt-1 text-sm opacity-70">{t("shop.empty.subtitle")}</div>
 
-      <button
-        type="button"
-        className="mt-4 rounded-xl px-4 py-2 border border-black/10 hover:bg-accent hover:text-white transition"
+      <Button
+        variant="primary"
+        size="md"
         onClick={onReset}
+        aria-label="reset"
+        className="mt-4"
       >
         {t("shop.actions.reset")}
-      </button>
+      </Button>
     </div>
   );
 };

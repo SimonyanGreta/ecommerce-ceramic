@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../Button";
 
 type Props = {
   value: number;
@@ -18,29 +19,36 @@ export const QuantitySelector: React.FC<Props> = ({
   const dec = () => onChange(Math.max(min, value - 1));
   const inc = () => onChange(Math.min(max, value + 1));
 
+  const canDec = !disabled && value > min;
+  const canInc = !disabled && value < max;
+
   return (
     <div className="inline-flex items-center rounded-xl border border-black/10 bg-white">
-      <button
+      <Button
         type="button"
+        variant="ghost"
+        size="sm"
         onClick={dec}
-        disabled={disabled || value <= min}
-        className="h-10 w-10 flex items-center justify-center hover:bg-black/5 disabled:opacity-40"
+        disabled={!canDec}
+        aria-label="Decrease quantity"
       >
         −
-      </button>
+      </Button>
 
-      <div className="h-10 w-12 flex items-center justify-center border-x border-black/10">
+      <div className="h-10 w-12 flex items-center justify-center">
         {value}
       </div>
 
-      <button
+      <Button
         type="button"
+        variant="ghost"
+        size="sm"
         onClick={inc}
-        disabled={disabled || value >= max}
-        className="h-10 w-10 flex items-center justify-center hover:bg-black/5 disabled:opacity-40"
+        disabled={!canInc}
+        aria-label="Increase quantity"
       >
         +
-      </button>
+      </Button>
     </div>
   );
 };
