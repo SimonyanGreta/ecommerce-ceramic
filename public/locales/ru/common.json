@@ -5,6 +5,17 @@
     "about": "О нас",
     "contact": "Контакты"
   },
+  "info": {
+    "whereTitle": "Где нас найти",
+    "touchTitle": "Связаться с нами",
+    "fields": {
+      "email": "Ваш email",
+      "message": "Сообщение"
+    },
+    "actions": {
+      "send": "Отправить"
+    }
+  },
   "shop": {
     "title": "Все товары",
     "searchPlaceholder": "Поиск товаров...",

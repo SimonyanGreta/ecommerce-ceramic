@@ -5,6 +5,17 @@
     "about": "About",
     "contact": "Contact"
   },
+  "info": {
+    "whereTitle": "Where to Find Us",
+    "touchTitle": "Get in Touch",
+    "fields": {
+      "email": "Your email",
+      "message": "Message"
+    },
+    "actions": {
+      "send": "Send Message"
+    }
+  },
   "shop": {
     "title": "All Products",
     "searchPlaceholder": "Search products...",
