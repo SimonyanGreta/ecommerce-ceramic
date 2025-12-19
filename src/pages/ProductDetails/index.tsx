@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useCartDrawer } from "../../hooks/useCartDrawer";
 
-// мок. Позже заменишь на fetch
+// TODO мок. Позже заменишь на fetch
 import { useProduct } from "../../features/products/hooks/useProduct";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { useTranslation } from "react-i18next";
-import { formatMoney } from "../../helpers/money.ts";
+import { formatMoney } from "../../helpers/money";
 import { ProductDetailsSkeleton } from "../../ui/components/ProductDetailsSkeleton";
 import { Button } from "../../ui/components/Button";
 
@@ -41,42 +41,71 @@ export default function ProductDetails() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-28 grid gap-10 md:grid-cols-2">
-      <div className="rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full max-h-120 object-contain"
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <h1 className="text-3xl font-semibold">{product.name}</h1>
-        <p className="mt-2 opacity-70">{product.description}</p>
-        <div className="mt-4 text-xl font-medium">
-          {formatMoney(product.price, product.currency, i18n.language)}
+    <div className="container mx-auto px-4 py-28">
+      <div className="grid gap-8 lg:grid-cols-3 lg:gap-10">
+        <div className="rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full max-h-120 object-contain"
+          />
         </div>
 
-        <div className="mt-6 flex items-center justify-between gap-4">
-          <div className="text-sm opacity-70">{t("product.quantity")}</div>
-          <QuantitySelector value={qty} onChange={setQty} min={1} max={99} />
-        </div>
+        <div className="lg:col-span-2 grid gap-8 md:grid-cols-12 md:items-start">
+          <div className="flex flex-col md:col-span-7">
+            <h1 className="text-3xl font-semibold text-background-dark">
+              {product.name}
+            </h1>
 
-        <Button
-          variant="outline"
-          size="md"
-          onClick={() => {
-            add(product, qty);
-            openCart();
-          }}
-          aria-label="Add to cart"
-          className="mt-8"
-        >
-          {t("product.addToCart")}
-        </Button>
-        <div className="mt-8 text-sm opacity-70">
-          <p>{t("product.freeShipping")}</p>
-          <p>{t("product.securePayment")}</p>
+            <p className="mt-3 text-secondary opacity-80">
+              {product.description}
+            </p>
+
+            <div className="mt-6 border-t border-primary/20 pt-4 text-sm text-secondary opacity-80 space-y-1">
+              <p>{t("product.freeShipping")}</p>
+              <p>{t("product.securePayment")}</p>
+            </div>
+          </div>
+
+          <div className="md:col-span-5 rounded-2xl border border-accent/20 bg-main shadow-lg backdrop-blur-sm p-5">
+            <div className="flex items-center justify-between gap-4">
+              <div className="text-xl font-semibold text-primary">
+                {formatMoney(product.price, product.currency, i18n.language)}
+              </div>
+
+              <QuantitySelector
+                value={qty}
+                onChange={setQty}
+                min={1}
+                max={99}
+              />
+            </div>
+
+            <Button
+              variant="primary"
+              size="md"
+              fullWidth
+              className="mt-4"
+              onClick={() => {
+                add(product, qty);
+                openCart();
+              }}
+              aria-label="Add to cart"
+            >
+              {t("product.addToCart")}
+            </Button>
+
+            <div className="mt-3 text-sm text-secondary opacity-70 flex items-center justify-between">
+              <span>{t("cart.summary.subtotal")}</span>
+              <span className="font-semibold text-background-dark">
+                {formatMoney(
+                  product.price * qty,
+                  product.currency,
+                  i18n.language,
+                )}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
