@@ -86,6 +86,7 @@
       "cartEmpty": "Cart is empty",
       "fullName": "Full name is required",
       "email": "Email is required",
+      "phone": "Phone number is required",
       "address": "Address is required"
     },
 

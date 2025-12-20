@@ -48,7 +48,8 @@ export function OrderSummary({
         </div>
       </div>
       <Button
-        variant="outline"
+        variant="primary"
+        type="submit"
         fullWidth
         loading={placing}
         onClick={onPlaceOrder}

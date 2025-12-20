@@ -79,6 +79,7 @@ export default function CheckoutPage() {
 
     if (!form.fullName.trim()) e.fullName = t("checkout.errors.fullName");
     if (!form.email.trim()) e.email = t("checkout.errors.email");
+    if (!form.phone.trim()) e.phone = t("checkout.errors.phone");
     if (!form.address.trim()) e.address = t("checkout.errors.address");
 
     return e;
