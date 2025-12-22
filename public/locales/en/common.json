@@ -84,10 +84,18 @@
 
     "errors": {
       "cartEmpty": "Cart is empty",
-      "fullName": "Full name is required",
-      "email": "Email is required",
-      "phone": "Phone number is required",
-      "address": "Address is required"
+      "fullName": { "required": "Full name is required" },
+      "email": {
+        "required": "Email is required",
+        "invalid": "Email format is invalid"
+      },
+      "phone": {
+        "required": "Phone number is required",
+        "invalid": "Phone number looks invalid"
+      },
+      "address": { "required": "Address is required" },
+      "city": { "required": "City is required" },
+      "country": { "required": "Country is required" }
     },
 
     "totals": {

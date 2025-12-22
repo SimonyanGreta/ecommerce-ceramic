@@ -83,11 +83,18 @@
     },
 
     "errors": {
-      "cartEmpty": "Корзина пустая",
-      "fullName": "Имя обязательно",
-      "email": "Email обязателен",
-      "phone": "Номер телефона обязателен",
-      "address": "Адрес обязателен"
+      "fullName": { "required": "Укажи имя" },
+      "email": {
+        "required": "Укажи email",
+        "invalid": "Некорректный email"
+      },
+      "phone": {
+        "required": "Укажи телефон",
+        "invalid": "Телефон выглядит некорректно"
+      },
+      "address": { "required": "Укажи адрес" },
+      "city": { "required": "Укажи город" },
+      "country": { "required": "Укажи страну" }
     },
 
     "totals": {

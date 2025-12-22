@@ -12,6 +12,8 @@ import { calcOrderTotals } from "../../helpers/checkout";
 
 import { ordersApi } from "../../services/orders";
 import type { CreateOrderPayload } from "../../types/order";
+import { validateCheckout } from "../../features/checkout/validation/validateCheckout";
+import { toCheckoutErrors } from "../../features/checkout/validation/mapCheckoutErrors";
 
 const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
@@ -75,14 +77,8 @@ export default function CheckoutPage() {
   };
 
   const validate = (): CheckoutErrors => {
-    const e: CheckoutErrors = {};
-
-    if (!form.fullName.trim()) e.fullName = t("checkout.errors.fullName");
-    if (!form.email.trim()) e.email = t("checkout.errors.email");
-    if (!form.phone.trim()) e.phone = t("checkout.errors.phone");
-    if (!form.address.trim()) e.address = t("checkout.errors.address");
-
-    return e;
+    const codes = validateCheckout(form);
+    return toCheckoutErrors(t, codes);
   };
 
   const placeOrder = async () => {
