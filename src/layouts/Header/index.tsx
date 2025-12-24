@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useCartDrawer } from "../../hooks/useCartDrawer";
 import { useCart } from "../../hooks/useCart";
 import { Button } from "../../ui/components/Button";
+import { LanguageSelect } from "../../widgets/LanguageSelect";
 import Cart from "../../assets/icon/cart";
 
 export const Header = () => {
@@ -44,6 +45,7 @@ export const Header = () => {
               </span>
             )}
           </Button>
+          <LanguageSelect />
         </nav>
       </div>
     </header>
