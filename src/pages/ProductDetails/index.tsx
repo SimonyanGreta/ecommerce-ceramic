@@ -8,10 +8,10 @@ import { useProduct } from "../../features/products/hooks/useProduct";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money";
-import { ProductDetailsSkeleton } from "../../ui/components/ProductDetailsSkeleton";
+import { ProductDetailsSkeleton } from "../../widgets/ProductDetailsSkeleton";
 import { Button } from "../../ui/components/Button";
 
-export default function ProductDetails() {
+export const ProductDetails = () => {
   const { t, i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { add } = useCart();
@@ -110,4 +110,4 @@ export default function ProductDetails() {
       </div>
     </div>
   );
-}
+};

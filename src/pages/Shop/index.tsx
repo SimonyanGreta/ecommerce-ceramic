@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useProducts } from "../../features/products/hooks/useProducts";
 import { useShopQueryState } from "../../hooks/useShopQueryState";
 
-import { ProductCard } from "../../ui/components/ProductCard";
-import { ProductCardSkeleton } from "../../ui/components/ProductCardSkeleton";
+import { ProductCard } from "../../widgets/ProductCard";
+import { ProductCardSkeleton } from "../../widgets/ProductCardSkeleton";
 import { Pagination } from "../../ui/components/Pagination";
 import { ShopEmptyState } from "./components/ShopEmptyState.tsx";
 import type { ProductsSort } from "../../services/products/products.api.ts";

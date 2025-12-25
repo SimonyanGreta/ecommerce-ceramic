@@ -27,7 +27,7 @@ const initialForm: CheckoutForm = {
   notes: "",
 };
 
-export default function CheckoutPage() {
+export const CheckoutPage = () => {
   const { items, subtotal, clear } = useCart();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -154,4 +154,4 @@ export default function CheckoutPage() {
       </div>
     </div>
   );
-}
+};

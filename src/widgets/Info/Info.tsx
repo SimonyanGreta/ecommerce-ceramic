@@ -1,6 +1,6 @@
-import Instagram from "../../../assets/icon/Instagram";
-import { Button } from "../Button";
-import { FormField } from "../../../components/form/FormField";
+import Instagram from "../../assets/icon/Instagram.tsx";
+import { Button } from "../../ui/components/Button";
+import { FormField } from "../../ui/components/FormField";
 import { useTranslation } from "react-i18next";
 
 export const Info = () => {

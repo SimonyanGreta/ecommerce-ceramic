@@ -1,5 +1,5 @@
-import { Map } from "../Map";
-import { Info } from "../Info";
+import { Map } from "../../widgets/Map";
+import { Info } from "../../widgets/Info";
 
 export const Footer = () => {
   return (

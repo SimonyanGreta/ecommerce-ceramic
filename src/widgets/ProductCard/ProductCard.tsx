@@ -1,10 +1,10 @@
-import CartPlus from "../../../assets/icon/cart_plus";
+import CartPlus from "../../assets/icon/cart_plus.tsx";
 import { Link } from "react-router-dom";
-import { useCart } from "../../../hooks/useCart";
-import type { Product } from "../../../types/product";
+import { useCart } from "../../hooks/useCart.ts";
+import type { Product } from "../../types/product.ts";
 import { useTranslation } from "react-i18next";
-import { formatMoney } from "../../../helpers/money";
-import { Button } from "../Button";
+import { formatMoney } from "../../helpers/money.ts";
+import { Button } from "../../ui/components/Button";
 
 type ProductCardProps = { product: Product };
 

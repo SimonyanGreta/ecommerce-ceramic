@@ -1,4 +1,4 @@
-import { ProductCard } from "../../../ui/components/ProductCard";
+import { ProductCard } from "../../../widgets/ProductCard";
 import {MOCK_PRODUCTS} from "../../../helpers/mocks.ts";
 
 export const ProductGrid = () => {

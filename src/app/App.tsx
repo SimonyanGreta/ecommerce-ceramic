@@ -3,19 +3,17 @@ import { About } from "../pages/About";
 import { Home } from "../pages/Home";
 import { Shop } from "../pages/Shop";
 import { Contact } from "../pages/Contact";
-import ProductDetails from "../pages/ProductDetails";
-import CheckoutPage from "../pages/CheckoutPage";
+import { ProductDetails } from "../pages/ProductDetails";
+import { CheckoutPage } from "../pages/CheckoutPage";
 import { CheckoutSuccess } from "../pages/CheckoutResult";
 import { CartDrawer } from "../features/cart/CartDrawer.tsx";
-import { CursorSepia } from "../components/CursorSepia";
-import { Footer } from "../ui/components/Footer";
+import { Footer } from "../layouts/Footer";
 import { Header } from "../layouts/Header";
 
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-main">
       <Header />
-      <CursorSepia />
 
       <main className="flex-1">
         <Routes>
