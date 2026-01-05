@@ -9,10 +9,12 @@ import { CheckoutSuccess } from "../pages/CheckoutResult";
 import { CartDrawer } from "../features/cart/CartDrawer.tsx";
 import { Footer } from "../layouts/Footer";
 import { Header } from "../layouts/Header";
+import { ScrollToTop } from "./ScrollToTop";
 
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-main">
+      <ScrollToTop />
       <Header />
 
       <main className="flex-1">
