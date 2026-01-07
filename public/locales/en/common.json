@@ -5,6 +5,9 @@
     "about": "About",
     "contact": "Contact"
   },
+  "menu": {
+    "title": "Menu"
+  },
   "info": {
     "whereTitle": "Where to Find Us",
     "touchTitle": "Get in Touch",

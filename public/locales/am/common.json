@@ -5,6 +5,9 @@
     "about": "Մեր մասին",
     "contact": "Կապ"
   },
+  "menu": {
+    "title": "Մենյու"
+  },
   "info": {
     "whereTitle": "Որտեղ գտնել մեզ",
     "touchTitle": "Կապ հաստատել",

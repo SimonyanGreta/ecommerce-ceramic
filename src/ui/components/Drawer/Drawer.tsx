@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import CloseIcon from "../../../assets/icon/close.tsx";
+import CloseIcon from "../../../assets/icon/close";
 import { Button } from "../Button";
 
 export type DrawerPosition = "left" | "right" | "top" | "bottom";
@@ -22,7 +23,7 @@ const positionClasses: Record<DrawerPosition, string> = {
   bottom: "bottom-0 left-0 w-full",
 };
 
-export const Drawer: React.FC<DrawerProps> = ({
+export const Drawer = ({
   isOpen,
   onClose,
   position = "right",
@@ -30,7 +31,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   height = "16rem",
   title,
   children,
-}) => {
+}: DrawerProps) => {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", handler);
@@ -39,22 +40,20 @@ export const Drawer: React.FC<DrawerProps> = ({
 
   const isHorizontal = position === "left" || position === "right";
 
-  return (
+  const drawerContent = (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Оверлей */}
           <motion.div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
 
-          {/* Drawer */}
           <motion.div
-            className={`fixed z-50 bg-white shadow-2xl ${positionClasses[position]} flex flex-col`}
+            className={`fixed z-50 flex flex-col bg-white shadow-2xl ${positionClasses[position]}`}
             style={{
               width: isHorizontal ? width : "100%",
               height: !isHorizontal ? height : "100%",
@@ -90,8 +89,13 @@ export const Drawer: React.FC<DrawerProps> = ({
             }}
             transition={{ type: "tween", duration: 0.25 }}
           >
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              {title && <h2 className="text-lg font-semibold">{title}</h2>}
+            <div className="flex items-center justify-between border-b border-primary/20 p-4">
+              {title && (
+                <h2 className="text-lg font-semibold text-background-dark">
+                  {title}
+                </h2>
+              )}
+
               <Button
                 variant="ghost"
                 size="md"
@@ -108,4 +112,6 @@ export const Drawer: React.FC<DrawerProps> = ({
       )}
     </AnimatePresence>
   );
+
+  return createPortal(drawerContent, document.body);
 };

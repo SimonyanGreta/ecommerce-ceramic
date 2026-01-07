@@ -5,6 +5,9 @@
     "about": "О нас",
     "contact": "Контакты"
   },
+  "menu": {
+    "title": "Меню"
+  },
   "info": {
     "whereTitle": "Где нас найти",
     "touchTitle": "Связаться с нами",

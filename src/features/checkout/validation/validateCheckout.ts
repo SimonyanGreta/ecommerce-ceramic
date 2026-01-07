@@ -26,8 +26,8 @@ export function validateCheckout(form: CheckoutForm): CheckoutErrorCodes {
 
   if (!form.address.trim()) e.address = "required";
 
-  if (!form.city.trim()) e.city = "required";
-  if (!form.country.trim()) e.country = "required";
+  // if (!form.city.trim()) e.city = "required";
+  // if (!form.country.trim()) e.country = "required";
 
   return e;
 }
