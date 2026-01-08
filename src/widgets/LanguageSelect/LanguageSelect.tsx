@@ -15,6 +15,12 @@ const LANGS: Array<{ code: Lang; label: string; flag: string }> = [
 export const LanguageSelect = () => {
   const { i18n } = useTranslation();
 
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const closeTimer = useRef<number | null>(null);
+
+  const [open, setOpen] = useState(false);
+  const [canHover, setCanHover] = useState(false);
+
   const current: Lang = useMemo(() => {
     const lng = i18n.language || "ru";
     if (lng.startsWith("am")) return "am";
@@ -27,8 +33,15 @@ export const LanguageSelect = () => {
     [current],
   );
 
-  const [open, setOpen] = useState(false);
-  const closeTimer = useRef<number | null>(null);
+  useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setCanHover(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   const clearCloseTimer = () => {
     if (closeTimer.current) {
@@ -49,19 +62,41 @@ export const LanguageSelect = () => {
   };
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    const onClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (!rootRef.current) return;
+      if (e.target instanceof Node && !rootRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("mousedown", onClickOutside);
+    window.addEventListener("touchstart", onClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("mousedown", onClickOutside);
+      window.removeEventListener("touchstart", onClickOutside);
+    };
   }, []);
 
   return (
     <div
+      ref={rootRef}
       className="relative"
       onMouseEnter={() => {
+        if (!canHover) return;
         clearCloseTimer();
         setOpen(true);
       }}
-      onMouseLeave={() => scheduleClose()}
+      onMouseLeave={() => {
+        if (!canHover) return;
+        scheduleClose();
+      }}
     >
       <Button
         type="button"
@@ -69,6 +104,10 @@ export const LanguageSelect = () => {
         size="sm"
         aria-label="Change language"
         className="h-10 w-10 p-0 rounded-xl"
+        onClick={() => {
+          if (canHover) return;
+          setOpen((prev) => !prev);
+        }}
       >
         <span className="text-[18px] leading-none">{currentMeta.flag}</span>
       </Button>
@@ -76,8 +115,14 @@ export const LanguageSelect = () => {
       {open && (
         <div
           className="absolute right-0 top-full pt-2"
-          onMouseEnter={() => clearCloseTimer()}
-          onMouseLeave={() => scheduleClose()}
+          onMouseEnter={() => {
+            if (!canHover) return;
+            clearCloseTimer();
+          }}
+          onMouseLeave={() => {
+            if (!canHover) return;
+            scheduleClose();
+          }}
         >
           <div className="rounded-2xl bg-white shadow-xl overflow-hidden">
             {LANGS.map((lang) => {
@@ -91,7 +136,7 @@ export const LanguageSelect = () => {
                   size="sm"
                   onClick={() => change(lang.code)}
                   className={[
-                    "w-full px-4 py-2 h-auto gap-2 ",
+                    "w-full px-4 py-2 h-auto gap-2 justify-start",
                     active
                       ? "bg-background-dark/5 text-background-dark"
                       : "bg-background-dark/5 text-secondary",
