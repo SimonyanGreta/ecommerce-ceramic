@@ -8,6 +8,11 @@
   "menu": {
     "title": "Menu"
   },
+  "intro": {
+    "ourCollection": "OUR COLLECTION",
+    "discover": "Discover our unique ceramics collection — handmade pieces inspired\n        by tradition and designed for modern living.",
+    "shopNow": "Shop Now"
+  },
   "info": {
     "whereTitle": "Where to Find Us",
     "touchTitle": "Get in Touch",

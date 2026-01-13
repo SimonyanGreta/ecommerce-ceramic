@@ -41,7 +41,6 @@ export const Info = () => {
 
         <form className="bg-white/5 backdrop-blur-md p-6 rounded-xl space-y-4 shadow-inner text-secondary">
           <FormField
-            label={t("info.fields.email")}
             required
             type="email"
             placeholder="you@example.com"
@@ -52,7 +51,6 @@ export const Info = () => {
 
           <FormField
             as="textarea"
-            label={t("info.fields.message")}
             required
             placeholder="Your message..."
             rows={4}

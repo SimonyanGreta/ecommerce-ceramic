@@ -40,7 +40,7 @@ export const CartItem = memo(({ item }: Props) => {
             aria-label="remove"
             className="ml-auto"
           >
-            {t("common.remove", "Remove")}
+            {t("common.remove")}
           </Button>
         </div>
       </div>

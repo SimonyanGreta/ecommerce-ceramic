@@ -1,7 +1,7 @@
 import React from "react";
 
 type BaseProps = {
-  label: string;
+  label?: string;
   required?: boolean;
   error?: string | null;
   hint?: string;
@@ -65,8 +65,8 @@ export const FormField: React.FC<FormFieldProps> = (props) => {
     <div className={className ?? ""}>
       <label htmlFor={fieldId} className="block text-sm">
         <div className="mb-1 flex items-center gap-2">
-          <span className="opacity-70">{label}</span>
-          {required && <span className="text-red-600">*</span>}
+          {label && <span className="opacity-70">{label}</span>}
+          {required && label && <span className="text-red-600">*</span>}
         </div>
 
         {props.as === "textarea" ? (
