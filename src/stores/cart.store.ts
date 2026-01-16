@@ -5,10 +5,11 @@ import {
   subscribeWithSelector,
 } from "zustand/middleware";
 import type { CartItem, Product } from "../types/product";
+import { DEFAULT_CURRENCY, type MoneyCurrency } from "../constants/currency";
 
 type CartState = {
   items: Record<string, CartItem>; // productId => item
-  currency: "USD" | "EUR" | "RUB" | "VND";
+  currency: MoneyCurrency;
   updatedAt: number | null;
   // служебное для будущей синхронизации
   pendingSync: boolean;
@@ -33,7 +34,7 @@ const CART_PERSIST_KEY = "cart:v1";
 
 const initialState: Omit<CartStore, keyof CartActions> = {
   items: {},
-  currency: "USD",
+  currency: DEFAULT_CURRENCY,
   updatedAt: null,
   pendingSync: false,
   version: 1,

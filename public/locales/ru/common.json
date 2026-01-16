@@ -34,6 +34,20 @@
       "nameAsc": "Название: А → Я",
       "nameDesc": "Название: Я → А"
     },
+    "filters": {
+      "categoryTitle": "Категория",
+      "priceTitle": "Цена",
+      "priceMin": "Мин. цена",
+      "priceMax": "Макс. цена",
+      "reset": "Сбросить фильтры",
+      "categories": {
+        "cups-mugs": "Чашки и кружки",
+        "plates-platters": "Тарелки и блюда",
+        "vases": "Вазы",
+        "seasoning-containers": "Ёмкости для специй",
+        "kettles": "Чайники"
+      }
+    },
     "loading": "Загружаем товары...",
     "showing": "Показано {{count}} из {{total}}",
     "error": "Не удалось загрузить товары",

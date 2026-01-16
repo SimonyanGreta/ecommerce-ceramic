@@ -14,6 +14,7 @@ import { ordersApi } from "../../services/orders";
 import type { CreateOrderPayload } from "../../types/order";
 import { validateCheckout } from "../../features/checkout/validation/validateCheckout";
 import { toCheckoutErrors } from "../../features/checkout/validation/mapCheckoutErrors";
+import { DEFAULT_CURRENCY } from "../../constants/currency";
 
 const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
@@ -54,7 +55,7 @@ export const CheckoutPage = () => {
   const [errors, setErrors] = useState<CheckoutErrors>({});
   const [placing, setPlacing] = useState(false);
 
-  const currency = items[0]?.currency ?? "USD";
+  const currency = items[0]?.currency ?? DEFAULT_CURRENCY;
 
   const { shipping, total } = useMemo(
     () => calcOrderTotals({ subtotal, currency, country: form.country }),

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type {
   ProductsListParams,
   ProductsListResponse,
@@ -11,12 +11,17 @@ type State = {
   error: string | null;
 };
 
-export function useProducts(params: ProductsListParams) {
+export const useProducts = (params: ProductsListParams) => {
   const [state, setState] = useState<State>({
     data: null,
     loading: true,
     error: null,
   });
+
+  const categoriesKey = useMemo(
+    () => (params.categories ?? []).slice().sort().join(","),
+    [params.categories],
+  );
 
   useEffect(() => {
     let alive = true;
@@ -41,7 +46,15 @@ export function useProducts(params: ProductsListParams) {
     return () => {
       alive = false;
     };
-  }, [params.q, params.sort, params.page, params.pageSize]);
+  }, [
+    params.q,
+    params.sort,
+    params.page,
+    params.pageSize,
+    categoriesKey,
+    params.priceMin,
+    params.priceMax,
+  ]);
 
   return state;
-}
+};

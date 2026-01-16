@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import type { ProductsSort } from "../services/products/products.api";
+import type { ProductCategory } from "../types/product";
 import {
   clampInt,
   isOneOf,
@@ -16,6 +17,14 @@ const SORT_VALUES = [
   "nameDesc",
 ] as const;
 
+const CATEGORY_VALUES = [
+  "cups-mugs",
+  "plates-platters",
+  "vases",
+  "seasoning-containers",
+  "kettles",
+] as const;
+
 type Options = {
   pageSize?: number;
   defaultSort?: ProductsSort;
@@ -27,29 +36,57 @@ type Return = {
   page: number;
   pageSize: number;
 
+  categories: ProductCategory[];
+  priceMin?: number;
+  priceMax?: number;
+
   reset: () => void;
   setQuery: (q: string) => void;
   setSort: (sort: ProductsSort) => void;
   setPage: (page: number) => void;
 
-  // вызывать после получения data (когда известно total)
+  setCategories: (categories: ProductCategory[]) => void;
+  setPriceMin: (value?: number) => void;
+  setPriceMax: (value?: number) => void;
+
   setTotalPages: (totalPages?: number) => void;
 };
 
-export function useShopQueryState(options?: Options): Return {
+const parseOptionalNumber = (raw: string | null): number | undefined => {
+  if (!raw) return undefined;
+  const n = Number(raw);
+  if (Number.isNaN(n)) return undefined;
+  return n;
+};
+
+const serializeCategories = (items: ProductCategory[]) => items.join(",");
+
+const parseCategories = (raw: string | null): ProductCategory[] => {
+  if (!raw) return [];
+
+  return raw
+    .split(",")
+    .map((item) => item.trim())
+    .filter((item): item is ProductCategory => isOneOf(item, CATEGORY_VALUES));
+};
+
+export const useShopQueryState = (options?: Options): Return => {
   const pageSize = options?.pageSize ?? 24;
   const defaultSort = options?.defaultSort ?? "featured";
 
   const [sp, setSp] = useSearchParams();
-
   const totalPagesRef = useRef<number | undefined>(undefined);
 
   const q = sp.get("q") ?? "";
 
   const sortRaw = sp.get("sort") ?? defaultSort;
   const sort: ProductsSort = isOneOf(sortRaw, SORT_VALUES)
-    ? (sortRaw as ProductsSort)
+    ? sortRaw
     : defaultSort;
+
+  const categories = parseCategories(sp.get("categories"));
+  const priceMin = parseOptionalNumber(sp.get("priceMin"));
+  const priceMax = parseOptionalNumber(sp.get("priceMax"));
 
   const pageRaw = sp.get("page");
 
@@ -57,18 +94,15 @@ export function useShopQueryState(options?: Options): Return {
     setSp(() => new URLSearchParams());
   }, [setSp]);
 
-  // сначала нормализуем минимум (>=1), чтобы сходить за данными
   const pageMin = normalizePage(pageRaw, { fallback: 1 }).value;
 
-  // если уже знаем totalPages — нормализуем и верхнюю границу
   const page = normalizePage(pageRaw, {
     fallback: 1,
     totalPages: totalPagesRef.current,
   }).value;
 
-  // ----------- INTERNAL: normalize URL (when page param exists)
   const normalizePageInUrl = useCallback(() => {
-    if (pageRaw == null) return; // если param отсутствует — не добавляем насильно
+    if (pageRaw == null) return;
 
     const norm = normalizePage(pageRaw, {
       fallback: 1,
@@ -85,12 +119,10 @@ export function useShopQueryState(options?: Options): Return {
     });
   }, [pageRaw, setSp]);
 
-  // чинит page=0/abc/-5 сразу при заходе
   useEffect(() => {
     normalizePageInUrl();
   }, [normalizePageInUrl]);
 
-  // ----------- SETTERS (write to URL)
   const setQuery = useCallback(
     (nextQ: string) => {
       setSp((prev) => {
@@ -127,30 +159,81 @@ export function useShopQueryState(options?: Options): Return {
     [setSp],
   );
 
-  // ----------- API: setTotalPages (called when data arrives)
+  const setCategories = useCallback(
+    (nextCategories: ProductCategory[]) => {
+      setSp((prev) => {
+        const n = new URLSearchParams(prev);
+
+        if (nextCategories.length > 0) {
+          n.set("categories", serializeCategories(nextCategories));
+        } else {
+          n.delete("categories");
+        }
+
+        n.set("page", "1");
+        return n;
+      });
+    },
+    [setSp],
+  );
+
+  const setPriceMin = useCallback(
+    (value?: number) => {
+      setSp((prev) => {
+        const n = new URLSearchParams(prev);
+
+        if (typeof value === "number") n.set("priceMin", String(value));
+        else n.delete("priceMin");
+
+        n.set("page", "1");
+        return n;
+      });
+    },
+    [setSp],
+  );
+
+  const setPriceMax = useCallback(
+    (value?: number) => {
+      setSp((prev) => {
+        const n = new URLSearchParams(prev);
+
+        if (typeof value === "number") n.set("priceMax", String(value));
+        else n.delete("priceMax");
+
+        n.set("page", "1");
+        return n;
+      });
+    },
+    [setSp],
+  );
+
   const setTotalPages = useCallback(
     (tp?: number) => {
       totalPagesRef.current =
         typeof tp === "number" ? Math.max(1, Math.floor(tp)) : undefined;
 
-      // когда появилась верхняя граница — чинит page>totalPages
       normalizePageInUrl();
     },
     [normalizePageInUrl],
   );
 
-  // ВАЖНО: для запроса используем pageMin (>=1) — чтобы не улететь на 0
-  // но наружу возвращаем page (с учетом totalPages если он уже известен)
-  // Это безопасно: до data page===pageMin, после data clamp’нется.
   return {
     q,
     sort,
-    reset,
     page: totalPagesRef.current ? page : pageMin,
     pageSize,
+
+    categories,
+    priceMin,
+    priceMax,
+
+    reset,
     setQuery,
     setSort,
     setPage,
+    setCategories,
+    setPriceMin,
+    setPriceMax,
     setTotalPages,
   };
-}
+};

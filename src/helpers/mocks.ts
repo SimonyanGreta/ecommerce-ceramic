@@ -1,4 +1,5 @@
-import type { Product } from "../types/product.ts";
+import { DEFAULT_CURRENCY } from "../constants/currency";
+import type { Product } from "../types/product";
 import cup2Img from "../assets/images/cup2.png";
 import plateImg from "../assets/images/plate3.png";
 import plate2Img from "../assets/images/plate4.png";
@@ -14,8 +15,9 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "Minimalist ceramic cup with matte finish — perfect for coffee or tea.",
     price: 45,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: cup2Img,
+    category: "cups-mugs",
   },
   {
     id: "2",
@@ -23,8 +25,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Handmade Plate",
     description: "Elegant white ceramic plate with natural edges.",
     price: 25,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: plateImg,
+    category: "plates-platters",
   },
   {
     id: "3",
@@ -33,8 +36,9 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "A textured plate ideal for interior accents or serving desserts.",
     price: 35,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: plate2Img,
+    category: "plates-platters",
   },
   {
     id: "4",
@@ -42,8 +46,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Sugar Bowl",
     description: "Compact sugar bowl with soft-glazed surface.",
     price: 15,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: sugarImg,
+    category: "seasoning-containers",
   },
   {
     id: "5",
@@ -51,8 +56,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Modern Vase",
     description: "Matte ceramic vase with a sleek, modern design.",
     price: 25,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: vase0Img,
+    category: "vases",
   },
   {
     id: "6",
@@ -60,8 +66,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Vintage Kettle",
     description: "Classic ceramic kettle with wooden handle and vintage look.",
     price: 65,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: kettleImg,
+    category: "kettles",
   },
   {
     id: "7",
@@ -70,8 +77,9 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "Minimalist ceramic cup with matte finish — perfect for coffee or tea.",
     price: 45,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: cup2Img,
+    category: "cups-mugs",
   },
   {
     id: "8",
@@ -79,8 +87,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Handmade Plate",
     description: "Elegant white ceramic plate with natural edges.",
     price: 25,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: plateImg,
+    category: "plates-platters",
   },
   {
     id: "9",
@@ -89,8 +98,9 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "A textured plate ideal for interior accents or serving desserts.",
     price: 35,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: plate2Img,
+    category: "plates-platters",
   },
   {
     id: "10",
@@ -98,8 +108,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Sugar Bowl",
     description: "Compact sugar bowl with soft-glazed surface.",
     price: 15,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: sugarImg,
+    category: "seasoning-containers",
   },
   {
     id: "11",
@@ -107,8 +118,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Modern Vase",
     description: "Matte ceramic vase with a sleek, modern design.",
     price: 25,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: vase0Img,
+    category: "vases",
   },
   {
     id: "12",
@@ -116,8 +128,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Vintage Kettle",
     description: "Classic ceramic kettle with wooden handle and vintage look.",
     price: 65,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: kettleImg,
+    category: "kettles",
   },
   {
     id: "13",
@@ -126,8 +139,9 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "Minimalist ceramic cup with matte finish — perfect for coffee or tea.",
     price: 45,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: cup2Img,
+    category: "cups-mugs",
   },
   {
     id: "14",
@@ -135,8 +149,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Handmade Plate",
     description: "Elegant white ceramic plate with natural edges.",
     price: 25,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: plateImg,
+    category: "plates-platters",
   },
   {
     id: "15",
@@ -145,8 +160,9 @@ export const MOCK_PRODUCTS: Product[] = [
     description:
       "A textured plate ideal for interior accents or serving desserts.",
     price: 35,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: plate2Img,
+    category: "plates-platters",
   },
   {
     id: "16",
@@ -154,8 +170,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Sugar Bowl",
     description: "Compact sugar bowl with soft-glazed surface.",
     price: 15,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: sugarImg,
+    category: "seasoning-containers",
   },
   {
     id: "17",
@@ -163,8 +180,9 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Modern Vase",
     description: "Matte ceramic vase with a sleek, modern design.",
     price: 25,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: vase0Img,
+    category: "vases",
   },
   {
     id: "18",
@@ -172,7 +190,8 @@ export const MOCK_PRODUCTS: Product[] = [
     name: "Vintage Kettle",
     description: "Classic ceramic kettle with wooden handle and vintage look.",
     price: 65,
-    currency: "USD",
+    currency: DEFAULT_CURRENCY,
     image: kettleImg,
+    category: "kettles",
   },
 ];

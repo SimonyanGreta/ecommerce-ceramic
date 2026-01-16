@@ -1,21 +1,17 @@
-export type MoneyCurrency = "USD" | "EUR" | "RUB" | "VND";
+import type { MoneyCurrency } from "../constants/currency";
 
-export function formatMoney(
+export const formatMoney = (
   amount: number,
   currency: MoneyCurrency,
-  locale?: string,
-) {
-  // locale можно брать из i18n.language позже
-  const safeLocale = locale ?? "en-US";
+  locale: string,
+) => {
+  const fractionDigits =
+    currency === "AMD" || currency === "RUB" || currency === "VND" ? 0 : 2;
 
-  try {
-    return new Intl.NumberFormat(safeLocale, {
-      style: "currency",
-      currency,
-      maximumFractionDigits: 2,
-    }).format(amount);
-  } catch {
-    // fallback если валюта/локаль не поддержана
-    return `${amount.toFixed(2)} ${currency}`;
-  }
-}
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  }).format(amount);
+};

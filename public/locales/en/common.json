@@ -34,6 +34,20 @@
       "nameAsc": "Name: A → Z",
       "nameDesc": "Name: Z → A"
     },
+    "filters": {
+      "categoryTitle": "Category",
+      "priceTitle": "Price",
+      "priceMin": "Min price",
+      "priceMax": "Max price",
+      "reset": "Reset filters",
+      "categories": {
+        "cups-mugs": "Cups and mugs",
+        "plates-platters": "Plates and platters",
+        "vases": "Vases",
+        "seasoning-containers": "Containers for seasonings",
+        "kettles": "Kettles"
+      }
+    },
     "loading": "Loading products...",
     "showing": "Showing {{count}} of {{total}}",
     "error": "Failed to load products",

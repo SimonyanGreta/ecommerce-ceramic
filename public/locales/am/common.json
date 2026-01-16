@@ -34,6 +34,20 @@
       "nameAsc": "Անուն՝ Ա → Ֆ",
       "nameDesc": "Անուն՝ Ֆ → Ա"
     },
+    "filters": {
+      "categoryTitle": "Կատեգորիաներ",
+      "priceTitle": "Գին",
+      "priceMin": "Մին.",
+      "priceMax": "Մաքս.",
+      "reset": "Վերակայել",
+      "categories": {
+        "cups-mugs": "Բաժակներ և գավաթներ",
+        "plates-platters": "Ափսեներ և սկուտեղներ",
+        "vases": "Ծաղկամաններ",
+        "seasoning-containers": "Համեմունքի տարաներ",
+        "kettles": "Թեյնիկներ"
+      }
+    },
     "loading": "Ապրանքները բեռնվում են...",
     "showing": "Ցուցադրված է {{count}} / {{total}}",
     "error": "Չհաջողվեց բեռնել ապրանքները",

@@ -1,4 +1,4 @@
-import type { Product } from "../../types/product";
+import type { Product, ProductCategory } from "../../types/product";
 
 export type ProductsSort =
   | "featured"
@@ -10,8 +10,12 @@ export type ProductsSort =
 export type ProductsListParams = {
   q?: string;
   sort?: ProductsSort;
-  page?: number; // 1-based
+  page?: number;
   pageSize?: number;
+
+  categories?: ProductCategory[];
+  priceMin?: number;
+  priceMax?: number;
 };
 
 export type ProductsListResponse = {
