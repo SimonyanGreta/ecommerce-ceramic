@@ -14,6 +14,8 @@ import { ShopEmptyState } from "./components/ShopEmptyState";
 import { ShopFilters } from "./components/ShopFilters";
 import { ShopToolbar } from "./components/ShopToolbar";
 
+import { getActiveFiltersCount } from "../../helpers/shopFilters";
+
 import Filter from "../../assets/icon/filter";
 
 export const Shop = () => {
@@ -68,6 +70,12 @@ export const Shop = () => {
     setTotalPages(tp);
   }, [data, setTotalPages]);
 
+  const activeFiltersCount = getActiveFiltersCount({
+    categories,
+    priceMin,
+    priceMax,
+  });
+
   return (
     <div className="w-full py-24 px-4 md:px-8">
       <div className="container mx-auto grid gap-8 lg:grid-cols-[280px_1fr]">
@@ -89,9 +97,16 @@ export const Shop = () => {
               variant="ghost"
               size="sm"
               onClick={() => setFiltersOpen(true)}
-              className="gap-2"
+              className="relative gap-2"
             >
+              <span>{t("shop.filters.button")}</span>
               <Filter />
+
+              {activeFiltersCount > 0 && (
+                <span className="absolute -right-2 -top-2 min-w-5 h-5 px-1 inline-flex items-center justify-center rounded-full bg-primary text-white text-[10px] leading-none">
+                  {activeFiltersCount}
+                </span>
+              )}
             </Button>
           </div>
 
