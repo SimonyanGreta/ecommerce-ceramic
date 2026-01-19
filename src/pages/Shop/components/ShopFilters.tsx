@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
-import { Button } from "../../../ui/components/Button";
+import type { ProductCategory } from "../../../types/product";
 import { CategoryFilter } from "./CategoryFilter";
 import { PriceFilter } from "./PriceFilter";
-import type { ProductCategory } from "../../../types/product";
+import { Button } from "../../../ui/components/Button";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   categories: ProductCategory[];
@@ -13,6 +13,7 @@ type Props = {
   onPriceMinChange: (next?: number) => void;
   onPriceMaxChange: (next?: number) => void;
   onReset: () => void;
+  onAfterReset?: () => void;
 };
 
 export const ShopFilters = ({
@@ -23,11 +24,12 @@ export const ShopFilters = ({
   onPriceMinChange,
   onPriceMaxChange,
   onReset,
+  onAfterReset,
 }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <aside className="border-r border-primary/20 p-4 space-y-6">
+    <aside className="md:border-r border-primary/20 p-4 space-y-6">
       <CategoryFilter value={categories} onChange={onCategoriesChange} />
 
       <PriceFilter
@@ -37,7 +39,14 @@ export const ShopFilters = ({
         onPriceMaxChange={onPriceMaxChange}
       />
 
-      <Button variant="outline" fullWidth onClick={onReset}>
+      <Button
+        variant="secondary"
+        fullWidth
+        onClick={() => {
+          onReset();
+          onAfterReset?.();
+        }}
+      >
         {t("shop.filters.reset")}
       </Button>
     </aside>

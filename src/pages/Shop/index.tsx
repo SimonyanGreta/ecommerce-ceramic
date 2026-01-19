@@ -7,10 +7,14 @@ import { useShopQueryState } from "../../hooks/useShopQueryState";
 import { ProductCard } from "../../widgets/ProductCard";
 import { ProductCardSkeleton } from "../../widgets/ProductCardSkeleton";
 import { Pagination } from "../../ui/components/Pagination";
+import { Drawer } from "../../ui/components/Drawer";
+import { Button } from "../../ui/components/Button";
 
 import { ShopEmptyState } from "./components/ShopEmptyState";
 import { ShopFilters } from "./components/ShopFilters";
 import { ShopToolbar } from "./components/ShopToolbar";
+
+import Filter from "../../assets/icon/filter";
 
 export const Shop = () => {
   const { t } = useTranslation();
@@ -34,6 +38,7 @@ export const Shop = () => {
   } = useShopQueryState({ pageSize: 8, defaultSort: "featured" });
 
   const [searchInput, setSearchInput] = useState(q);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     setSearchInput(q);
@@ -66,17 +71,30 @@ export const Shop = () => {
   return (
     <div className="w-full py-24 px-4 md:px-8">
       <div className="container mx-auto grid gap-8 lg:grid-cols-[280px_1fr]">
-        <ShopFilters
-          categories={categories}
-          priceMin={priceMin}
-          priceMax={priceMax}
-          onCategoriesChange={setCategories}
-          onPriceMinChange={setPriceMin}
-          onPriceMaxChange={setPriceMax}
-          onReset={reset}
-        />
+        <div className="hidden lg:block">
+          <ShopFilters
+            categories={categories}
+            priceMin={priceMin}
+            priceMax={priceMax}
+            onCategoriesChange={setCategories}
+            onPriceMinChange={setPriceMin}
+            onPriceMaxChange={setPriceMax}
+            onReset={reset}
+          />
+        </div>
 
         <div>
+          <div className="mb-4 flex lg:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setFiltersOpen(true)}
+              className="gap-2"
+            >
+              <Filter />
+            </Button>
+          </div>
+
           <ShopToolbar
             searchValue={searchInput}
             sort={sort}
@@ -134,6 +152,25 @@ export const Shop = () => {
           </section>
         </div>
       </div>
+
+      <Drawer
+        isOpen={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
+        position="right"
+        width="20rem"
+        title={t("shop.filters.button")}
+      >
+        <ShopFilters
+          categories={categories}
+          priceMin={priceMin}
+          priceMax={priceMax}
+          onCategoriesChange={setCategories}
+          onPriceMinChange={setPriceMin}
+          onPriceMaxChange={setPriceMax}
+          onReset={reset}
+          onAfterReset={() => setFiltersOpen(false)}
+        />
+      </Drawer>
     </div>
   );
 };
