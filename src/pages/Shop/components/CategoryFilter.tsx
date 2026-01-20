@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import type { ProductCategory } from "../../../types/product";
 import { SHOP_CATEGORIES } from "../../../constants/categories";
+import { Checkbox } from "../../../ui/components/Checkbox";
 
 type Props = {
   value: ProductCategory[];
@@ -30,18 +31,13 @@ export const CategoryFilter = ({ value, onChange }: Props) => {
           const checked = value.includes(category);
 
           return (
-            <label
+            <Checkbox
               key={category}
-              className="inline-flex items-center gap-2 text-sm  cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => toggleCategory(category)}
-                className="h-4 w-4 "
-              />
-              <span>{t(`shop.filters.categories.${category}`)}</span>
-            </label>
+              id={`category-${category}`}
+              checked={checked}
+              onChange={() => toggleCategory(category)}
+              label={t(`shop.filters.categories.${category}`)}
+            />
           );
         })}
       </div>
