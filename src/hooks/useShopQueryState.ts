@@ -126,6 +126,14 @@ export const useShopQueryState = (options?: Options): Return => {
   const setQuery = useCallback(
     (nextQ: string) => {
       setSp((prev) => {
+        const currentQ = prev.get("q") ?? "";
+        const nextNormalized = nextQ.trim();
+        const currentNormalized = currentQ.trim();
+
+        if (nextNormalized === currentNormalized) {
+          return prev;
+        }
+
         const n = new URLSearchParams(prev);
         setOrDeleteParam(n, "q", nextQ);
         n.set("page", "1");
@@ -138,6 +146,13 @@ export const useShopQueryState = (options?: Options): Return => {
   const setSort = useCallback(
     (nextSort: ProductsSort) => {
       setSp((prev) => {
+        const currentSort = prev.get("sort") ?? defaultSort;
+        const nextNormalized = nextSort || defaultSort;
+
+        if (currentSort === nextNormalized) {
+          return prev;
+        }
+
         const n = new URLSearchParams(prev);
         if (nextSort !== "featured") n.set("sort", nextSort);
         else n.delete("sort");
@@ -145,14 +160,21 @@ export const useShopQueryState = (options?: Options): Return => {
         return n;
       });
     },
-    [setSp],
+    [defaultSort, setSp],
   );
 
   const setPage = useCallback(
     (nextPage: number) => {
       setSp((prev) => {
+        const safeNext = String(clampInt(nextPage, 1));
+        const currentPage = prev.get("page") ?? "1";
+
+        if (currentPage === safeNext) {
+          return prev;
+        }
+
         const n = new URLSearchParams(prev);
-        n.set("page", String(clampInt(nextPage, 1)));
+        n.set("page", safeNext);
         return n;
       });
     },
@@ -162,10 +184,17 @@ export const useShopQueryState = (options?: Options): Return => {
   const setCategories = useCallback(
     (nextCategories: ProductCategory[]) => {
       setSp((prev) => {
+        const currentRaw = prev.get("categories") ?? "";
+        const nextRaw = serializeCategories([...nextCategories].sort());
+
+        if (currentRaw === nextRaw) {
+          return prev;
+        }
+
         const n = new URLSearchParams(prev);
 
         if (nextCategories.length > 0) {
-          n.set("categories", serializeCategories(nextCategories));
+          n.set("categories", nextRaw);
         } else {
           n.delete("categories");
         }
@@ -180,9 +209,16 @@ export const useShopQueryState = (options?: Options): Return => {
   const setPriceMin = useCallback(
     (value?: number) => {
       setSp((prev) => {
+        const currentRaw = prev.get("priceMin");
+        const nextRaw = typeof value === "number" ? String(value) : null;
+
+        if (currentRaw === nextRaw) {
+          return prev;
+        }
+
         const n = new URLSearchParams(prev);
 
-        if (typeof value === "number") n.set("priceMin", String(value));
+        if (nextRaw !== null) n.set("priceMin", nextRaw);
         else n.delete("priceMin");
 
         n.set("page", "1");
@@ -195,9 +231,16 @@ export const useShopQueryState = (options?: Options): Return => {
   const setPriceMax = useCallback(
     (value?: number) => {
       setSp((prev) => {
+        const currentRaw = prev.get("priceMax");
+        const nextRaw = typeof value === "number" ? String(value) : null;
+
+        if (currentRaw === nextRaw) {
+          return prev;
+        }
+
         const n = new URLSearchParams(prev);
 
-        if (typeof value === "number") n.set("priceMax", String(value));
+        if (nextRaw !== null) n.set("priceMax", nextRaw);
         else n.delete("priceMax");
 
         n.set("page", "1");
