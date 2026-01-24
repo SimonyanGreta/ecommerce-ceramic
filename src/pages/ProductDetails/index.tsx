@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useCart } from "../../hooks/useCart";
 import { useCartDrawer } from "../../hooks/useCartDrawer";
 
 // TODO мок. Позже заменишь на fetch
 import { useProduct } from "../../features/products/hooks/useProduct";
-import { QuantitySelector } from "../../ui/components/QuantitySelector";
-import { useTranslation } from "react-i18next";
-import { formatMoney } from "../../helpers/money";
 import { ProductDetailsSkeleton } from "../../widgets/ProductDetailsSkeleton";
+import { Breadcrumbs } from "../../widgets/Breadcrumbs";
 import { Button } from "../../ui/components/Button";
+import { formatMoney } from "../../helpers/money";
+import { QuantitySelector } from "../../ui/components/QuantitySelector";
 
 export const ProductDetails = () => {
   const { t, i18n } = useTranslation();
@@ -40,8 +41,21 @@ export const ProductDetails = () => {
     );
   }
 
+  const breadcrumbItems = [
+    { label: t("nav.shop"), to: "/shop" },
+    {
+      label: t(`shop.filters.categories.${product.category}`),
+      to: `/shop?categories=${product.category}`,
+    },
+    { label: product.name },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-28">
+      <div className="mb-6 flex flex-col gap-3">
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+
       <div className="grid gap-8 lg:grid-cols-3 lg:gap-10">
         <div className="rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
           <img
