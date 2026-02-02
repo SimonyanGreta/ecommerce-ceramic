@@ -8,6 +8,7 @@ import { useCartDrawer } from "../../hooks/useCartDrawer";
 import { useProduct } from "../../features/products/hooks/useProduct";
 import { ProductDetailsSkeleton } from "../../widgets/ProductDetailsSkeleton";
 import { Breadcrumbs } from "../../widgets/Breadcrumbs";
+import { BackButton } from "../../widgets/BackButton";
 import { Button } from "../../ui/components/Button";
 import { formatMoney } from "../../helpers/money";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
@@ -52,12 +53,17 @@ export const ProductDetails = () => {
 
   return (
     <div className="container mx-auto px-4 py-28">
-      <div className="mb-6 flex flex-col gap-3">
+      <div className="mb-6 hidden md:flex items-center gap-3">
+        <BackButton />
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3 lg:gap-10">
-        <div className="rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
+        <div className="relative rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
+          <div className="absolute left-3 top-3 z-10 md:hidden">
+            <BackButton />
+          </div>
+
           <img
             src={product.image}
             alt={product.name}
