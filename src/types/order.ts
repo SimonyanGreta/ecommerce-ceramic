@@ -1,4 +1,4 @@
-import type { MoneyCurrency } from "../helpers/money";
+import type { MoneyCurrency } from "../constants/currency";
 
 export type OrderItemInput = {
   productId: string;
