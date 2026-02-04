@@ -2,7 +2,7 @@ export const ProductDetailsSkeleton = () => {
   return (
     <div className="container mx-auto px-4 py-28 grid gap-10 md:grid-cols-2">
       <div className="rounded-2xl overflow-hidden bg-white shadow-lg">
-        <div className="w-full h-[480px] bg-black/5 animate-pulse" />
+        <div className="w-full h-120 bg-black/5 animate-pulse" />
       </div>
 
       <div className="flex flex-col">
