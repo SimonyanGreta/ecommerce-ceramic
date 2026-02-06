@@ -1,20 +1,22 @@
 import { useMemo, useState, useEffect } from "react";
-import { useCart } from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import { useCart } from "../../hooks/useCart";
 import { ShippingForm } from "./components/ShippingForm";
 import { OrderItems } from "./components/OrderItems";
 import { OrderSummary } from "./components/OrderSummary";
 import { CartEmpty } from "./components/CartEmpty";
 
 import type { CheckoutErrors, CheckoutForm } from "../../types/checkout";
-import { calcOrderTotals } from "../../helpers/checkout";
-
-import { ordersApi } from "../../services/orders";
 import type { CreateOrderPayload } from "../../types/order";
+
+import { calcOrderTotals } from "../../helpers/checkout";
+import { ordersApi } from "../../services/orders";
 import { validateCheckout } from "../../features/checkout/validation/validateCheckout";
 import { toCheckoutErrors } from "../../features/checkout/validation/mapCheckoutErrors";
 import { DEFAULT_CURRENCY } from "../../constants/currency";
+import { useCheckoutResultStore } from "../../stores/checkout-result.store";
 
 const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
@@ -33,16 +35,24 @@ export const CheckoutPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const setLastSuccessOrder = useCheckoutResultStore(
+    (state) => state.setLastSuccessOrder,
+  );
+
   const [form, setForm] = useState<CheckoutForm>(() => {
     try {
       const raw = localStorage.getItem(CHECKOUT_DRAFT_KEY);
       if (!raw) return initialForm;
+
       const parsed = JSON.parse(raw) as Partial<CheckoutForm>;
       return { ...initialForm, ...parsed };
     } catch {
       return initialForm;
     }
   });
+
+  const [errors, setErrors] = useState<CheckoutErrors>({});
+  const [placing, setPlacing] = useState(false);
 
   useEffect(() => {
     try {
@@ -52,9 +62,6 @@ export const CheckoutPage = () => {
     }
   }, [form]);
 
-  const [errors, setErrors] = useState<CheckoutErrors>({});
-  const [placing, setPlacing] = useState(false);
-
   const currency = items[0]?.currency ?? DEFAULT_CURRENCY;
 
   const { shipping, total } = useMemo(
@@ -62,17 +69,14 @@ export const CheckoutPage = () => {
     [subtotal, currency, form.country],
   );
 
-  if (items.length === 0) {
-    return <CartEmpty />;
-  }
-
   const setField = <K extends keyof CheckoutForm>(
     key: K,
     value: CheckoutForm[K],
   ) => {
-    setForm((s) => ({ ...s, [key]: value }));
-    setErrors((e) => {
-      const { [key]: _, ...rest } = e;
+    setForm((prev) => ({ ...prev, [key]: value }));
+
+    setErrors((prev) => {
+      const { [key]: _, ...rest } = prev;
       return rest;
     });
   };
@@ -83,9 +87,12 @@ export const CheckoutPage = () => {
   };
 
   const placeOrder = async () => {
-    const e = validate();
-    setErrors(e);
-    if (Object.keys(e).length > 0) return;
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      return;
+    }
 
     const payload: CreateOrderPayload = {
       customer: {
@@ -97,10 +104,10 @@ export const CheckoutPage = () => {
         country: form.country.trim(),
         notes: form.notes.trim() ? form.notes.trim() : undefined,
       },
-      items: items.map((it) => ({
-        productId: it.productId,
-        qty: it.qty,
-        price: it.price,
+      items: items.map((item) => ({
+        productId: item.productId,
+        qty: item.qty,
+        price: item.price,
       })),
       subtotal,
       shipping,
@@ -109,15 +116,19 @@ export const CheckoutPage = () => {
     };
 
     setPlacing(true);
+
     try {
       const { orderId } = await ordersApi.createOrder(payload);
+
+      setLastSuccessOrder({
+        orderId,
+        createdAt: new Date().toISOString(),
+      });
 
       clear();
       localStorage.removeItem(CHECKOUT_DRAFT_KEY);
 
-      navigate(`/checkout/success?orderId=${encodeURIComponent(orderId)}`, {
-        replace: true,
-      });
+      navigate("/checkout/success", { replace: true });
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       alert(msg);
@@ -128,8 +139,12 @@ export const CheckoutPage = () => {
     }
   };
 
+  if (items.length === 0) {
+    return <CartEmpty />;
+  }
+
   return (
-    <div className="py-28 container mx-auto px-4">
+    <div className="container mx-auto px-4 py-28">
       <h1 className="text-xl font-semibold">{t("checkout.title")}</h1>
 
       <div className="mt-6 grid gap-6 md:grid-cols-3">

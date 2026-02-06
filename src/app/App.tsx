@@ -5,7 +5,7 @@ import { Shop } from "../pages/Shop";
 import { Contact } from "../pages/Contact";
 import { ProductDetails } from "../pages/ProductDetails";
 import { CheckoutPage } from "../pages/CheckoutPage";
-import { CheckoutSuccess } from "../pages/CheckoutResult";
+import CheckoutResult from "../pages/CheckoutResult";
 import { CartDrawer } from "../features/cart/CartDrawer.tsx";
 import { Footer } from "../layouts/Footer";
 import { Header } from "../layouts/Header";
@@ -25,7 +25,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:slug" element={<ProductDetails />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+          <Route path="/checkout/success" element={<CheckoutResult />} />
         </Routes>
       </main>
 

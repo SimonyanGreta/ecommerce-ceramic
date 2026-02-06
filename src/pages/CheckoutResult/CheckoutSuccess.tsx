@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
 import { ButtonLink } from "../../ui/components/Button";
 
-export const CheckoutSuccess = () => {
+type CheckoutSuccessProps = {
+  orderId: string;
+};
+
+export const CheckoutSuccess = ({ orderId }: CheckoutSuccessProps) => {
   const { t } = useTranslation();
-  const [sp] = useSearchParams();
-  const orderId = sp.get("orderId");
 
   return (
     <div className="py-28 container mx-auto px-4">
