@@ -2,6 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useAbout } from "../../features/about/useAbout";
 import { AboutSection } from "./components/AboutSection";
 import { AboutSectionSkeleton } from "./components/AboutSectionSkeleton.tsx";
+import { Info } from "../../widgets/Info";
+import { LocationMap } from "../../widgets/LocationMap";
 
 export const About = () => {
   const { i18n } = useTranslation();
@@ -47,6 +49,10 @@ export const About = () => {
             />
           ))}
         </div>
+      </div>
+      <div className="m-10 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+        <Info />
+        <LocationMap />
       </div>
     </div>
   );

@@ -13,6 +13,10 @@
     "discover": "Discover our unique ceramics collection — handmade pieces inspired\n        by tradition and designed for modern living.",
     "shopNow": "Shop Now"
   },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch for product questions, custom orders, collaborations or delivery details."
+  },
   "info": {
     "whereTitle": "Where to Find Us",
     "touchTitle": "Get in Touch",
@@ -21,7 +25,8 @@
       "message": "Message"
     },
     "actions": {
-      "send": "Send Message"
+      "send": "Send Message",
+      "openContactPage": "Contacts"
     }
   },
   "shop": {

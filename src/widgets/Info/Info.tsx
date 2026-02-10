@@ -1,68 +1,73 @@
-import Instagram from "../../assets/icon/Instagram.tsx";
-import { Button } from "../../ui/components/Button";
-import { FormField } from "../../ui/components/FormField";
 import { useTranslation } from "react-i18next";
 
-export const Info = () => {
+import { ButtonLink } from "../../ui/components/Button";
+import Instagram from "../../assets/icon/Instagram";
+import Email from "../../assets/icon/email";
+import Phone from "../../assets/icon/phone";
+
+type InfoProps = {
+  isContactPage?: boolean;
+};
+
+export const Info = ({ isContactPage = false }: InfoProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 px-6 py-10">
-      <div>
-        <h2 className="text-2xl font-semibold mb-6">{t("info.whereTitle")}</h2>
+    <section className="h-full rounded-2xl bg-white/30 p-6 shadow-sm backdrop-blur-md sm:p-8">
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <h2 className="text-2xl font-semibold">{t("info.whereTitle")}</h2>
 
-        <div className="space-y-6 text-secondary">
-          <div>
-            <p className="font-medium">Artashat, XXXX 15</p>
-            <p className="text-sm">Nuard Boutique</p>
-            <p className="text-sm mt-1">Mon–Sat: 10:00–18:00</p>
-          </div>
+        {!isContactPage && (
+          <ButtonLink to="/contact" variant="outline" size="sm">
+            {t("info.actions.openContactPage")}
+          </ButtonLink>
+        )}
+      </div>
 
-          <div className="flex flex-col items-center gap-2">
-            <p className="font-medium">Yerevan, Buzand St, Vernissage</p>
-            <p className="text-sm">Art Market XX</p>
-            <p className="text-sm mt-1">09:00–17:00</p>
-
-            <a
-              href="https://www.instagram.com/nuardceramics/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 mt-4 hover:text-primary transition text-sm"
-              aria-label="Instagram"
-            >
-              <Instagram />
-            </a>
-          </div>
+      <div className="space-y-8 text-secondary">
+        <div className="space-y-2">
+          <p className="font-medium text-black">Artashat, XXXX 15</p>
+          <p className="text-sm">Nuard Boutique</p>
+          <p className="text-sm">Mon–Sat: 10:00–18:00</p>
         </div>
+        <div className="space-y-2">
+          <p className="font-medium text-black">
+            Yerevan, Buzand St, Vernissage
+          </p>
+          <p className="text-sm">Art Market XX</p>
+          <p className="text-sm">09:00–17:00</p>
+        </div>
+        <div className="flex md:flex-row flex-col gap-3 border-t border-black/10 pt-6">
+          <a
+            href="https://www.instagram.com/nuardceramics/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm transition hover:text-primary"
+            aria-label="Instagram"
+          >
+            <Instagram />
+            <span>@nuardceramics</span>
+          </a>
+
+          <a
+            href="mailto:nuard@ceramics.com"
+            className="inline-flex items-center gap-2 text-sm transition hover:text-primary"
+            aria-label="Email"
+          >
+            <Email />
+            <span>nuard@ceramics.com</span>
+          </a>
+
+          <a
+            href="tel:+374xxxxxx"
+            className="inline-flex items-center gap-2 text-sm transition hover:text-primary"
+            aria-label="Phone"
+          >
+            <Phone />
+            <span>+374 xxxxxx</span>
+          </a>
+        </div>{" "}
       </div>
-
-      <div>
-        <h2 className="text-2xl font-semibold mb-6">{t("info.touchTitle")}</h2>
-
-        <form className="bg-white/5 backdrop-blur-md p-6 rounded-xl space-y-4 shadow-inner text-secondary">
-          <FormField
-            required
-            type="email"
-            placeholder="you@example.com"
-            value=""
-            onChange={() => {}}
-            autoComplete="email"
-          />
-
-          <FormField
-            as="textarea"
-            required
-            placeholder="Your message..."
-            rows={4}
-            value=""
-            onChange={() => {}}
-          />
-
-          <Button type="submit" variant="primary" size="md" fullWidth>
-            {t("info.actions.send")}
-          </Button>
-        </form>
-      </div>
-    </div>
+    </section>
   );
 };
