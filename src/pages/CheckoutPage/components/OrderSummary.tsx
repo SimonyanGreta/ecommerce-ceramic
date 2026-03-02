@@ -1,6 +1,7 @@
-import { formatMoney, type MoneyCurrency } from "../../../helpers/money.ts";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../ui/components/Button";
+import { formatMoney } from "../../../helpers/money.ts";
+import type { MoneyCurrency } from "../../../constants/currency.ts";
 
 type Props = {
   subtotal: number;

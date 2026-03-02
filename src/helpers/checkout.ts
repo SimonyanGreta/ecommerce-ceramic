@@ -1,4 +1,4 @@
-import type { MoneyCurrency } from "./money";
+import type { MoneyCurrency } from "../constants/currency.ts";
 
 export type ShippingRuleInput = {
   subtotal: number;
