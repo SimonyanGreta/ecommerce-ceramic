@@ -1,0 +1,138 @@
+{
+  "nav": {
+    "home": "Главная",
+    "shop": "Покупки",
+    "about": "О нас",
+    "contact": "Контакты"
+  },
+  "menu": {
+    "title": "Меню"
+  },
+  "intro": {
+    "ourCollection": "НАША КОЛЛЕКЦИЯ",
+    "discover": "Откройте для себя нашу уникальную коллекцию керамики — изделия ручной работы, вдохновленные традициями и созданные для современной жизни.",
+    "shopNow": "Все товары"
+  },
+  "contact": {
+    "title": "Контакты",
+    "description": "Свяжитесь с нами по вопросам, касающимся продукции, индивидуальных заказов, сотрудничества или деталей доставки."
+  },
+  "info": {
+    "whereTitle": "Где нас найти",
+    "touchTitle": "Связаться с нами",
+    "fields": {
+      "email": "Ваш email",
+      "message": "Сообщение"
+    },
+    "actions": {
+      "send": "Отправить",
+      "openContactPage": "Контакты"
+    }
+  },
+  "shop": {
+    "title": "Все товары",
+    "searchPlaceholder": "Поиск товаров...",
+    "sort": {
+      "featured": "Рекомендуемое",
+      "priceAsc": "Цена: по возрастанию",
+      "priceDesc": "Цена: по убыванию",
+      "nameAsc": "Название: А → Я",
+      "nameDesc": "Название: Я → А"
+    },
+    "filters": {
+      "categoryTitle": "Категория",
+      "priceTitle": "Цена",
+      "priceMin": "Мин. цена",
+      "priceMax": "Макс. цена",
+      "reset": "Сбросить фильтры",
+      "button": "Фильтры",
+      "categories": {
+        "cups-mugs": "Чашки и кружки",
+        "plates-platters": "Тарелки и блюда",
+        "vases": "Вазы",
+        "seasoning-containers": "Ёмкости для специй",
+        "kettles": "Чайники"
+      }
+    },
+    "loading": "Загружаем товары...",
+    "showing": "Показано {{count}} из {{total}}",
+    "error": "Не удалось загрузить товары",
+    "empty": {
+      "title": "Товары не найдены",
+      "subtitle": "Попробуй изменить поиск или сортировку"
+    },
+    "actions": {
+      "reset": "Сбросить"
+    }
+  },
+  "product": {
+    "viewMore": "Подробнее",
+    "loading": "Загрузка...",
+    "notFound": "Товар не найден",
+    "quantity": "Количество",
+    "addToCart": "В корзину",
+    "freeShipping": "Бесплатная доставка по миру при заказе от $100.",
+    "securePayment": "Безопасная оплата PayPal или картой."
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": {
+      "title": "Корзина пуста",
+      "subtitle": "Добавьте товары, чтобы они появились здесь"
+    },
+    "summary": {
+      "checkout": "Оформить",
+      "clear": "Очистить",
+      "subtotal": "Подытог"
+    }
+  },
+  "common": {
+    "remove": "Удалить"
+  },
+  "checkout": {
+    "title": "Оформление",
+    "shippingTitle": "Данные доставки",
+    "orderItemsTitle": "Состав заказа",
+    "summaryTitle": "Итого",
+    "emptyCart": "Корзина пустая.",
+    "placeOrder": "Оформить (макет)",
+    "placingOrder": "Оформляем...",
+    "successTitle": "Заказ отправлен",
+    "successText": "Мы получили заявку. Скоро свяжемся, чтобы уточнить детали.",
+    "orderId": "Номер заказа:",
+    "fields": {
+      "fullName": "Имя и фамилия",
+      "email": "Email",
+      "phone": "Телефон",
+      "address": "Адрес",
+      "city": "Город",
+      "country": "Страна",
+      "notes": "Комментарий"
+    },
+
+    "errors": {
+      "fullName": { "required": "Укажи имя" },
+      "email": {
+        "required": "Укажи email",
+        "invalid": "Некорректный email"
+      },
+      "phone": {
+        "required": "Укажи телефон",
+        "invalid": "Телефон выглядит некорректно"
+      },
+      "address": { "required": "Укажи адрес" },
+      "city": { "required": "Укажи город" },
+      "country": { "required": "Укажи страну" }
+    },
+
+    "totals": {
+      "subtotal": "Подытог",
+      "shipping": "Доставка",
+      "total": "Итого"
+    },
+
+    "actions": {
+      "goShop": "В магазин"
+    }
+  }
+}
