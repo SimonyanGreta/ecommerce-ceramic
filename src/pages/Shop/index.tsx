@@ -78,7 +78,7 @@ export const Shop = () => {
 
   return (
     <div className="w-full py-24 px-4 md:px-8">
-      <div className="container mx-auto grid gap-8 lg:grid-cols-[280px_1fr]">
+      <div className="mx-auto grid max-w-360 gap-8 lg:grid-cols-[280px_1fr]">
         <div className="hidden lg:block">
           <ShopFilters
             categories={categories}
@@ -145,7 +145,7 @@ export const Shop = () => {
                       })}
                     </div>
 
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
                       {data.items.map((product) => (
                         <ProductCard key={product.id} product={product} />
                       ))}

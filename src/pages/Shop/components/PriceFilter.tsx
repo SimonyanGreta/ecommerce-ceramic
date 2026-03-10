@@ -65,7 +65,6 @@ export const PriceFilter = ({
 
       <div className="grid grid-cols-2 gap-3">
         <FormField
-          label={t("shop.filters.priceMin")}
           type="number"
           value={minInput}
           onChange={(e) => setMinInput(e.target.value)}
@@ -73,7 +72,6 @@ export const PriceFilter = ({
         />
 
         <FormField
-          label={t("shop.filters.priceMax")}
           type="number"
           value={maxInput}
           onChange={(e) => setMaxInput(e.target.value)}

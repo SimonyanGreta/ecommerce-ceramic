@@ -29,7 +29,7 @@ export const ShopFilters = ({
   const { t } = useTranslation();
 
   return (
-    <aside className="md:border-r border-primary/20 p-4 space-y-6">
+    <aside className="h-full rounded-2xl bg-white/30 backdrop-blur-md p-2 shadow-sm sm:p-4 space-y-6">
       <CategoryFilter value={categories} onChange={onCategoriesChange} />
 
       <PriceFilter
@@ -40,7 +40,7 @@ export const ShopFilters = ({
       />
 
       <Button
-        variant="secondary"
+        variant="outline"
         fullWidth
         onClick={() => {
           onReset();
