@@ -4,6 +4,7 @@ import kettle2Img from "../../../assets/images/kettle2.png";
 import toyImg from "../../../assets/images/toy.jpg";
 import ashtrayImg from "../../../assets/images/ashtray2.png";
 import saryanImg from "../../../assets/images/saryan.webp";
+import logo2 from "../../../assets/images/logo2.png";
 
 export const HeroSection = () => {
   return (
@@ -19,7 +20,7 @@ export const HeroSection = () => {
         />
       </div>
       <div className="row-span-1 col-span-1 bg-gray-200 rounded-lg overflow-hidden">
-        <img src="/logo/logo2.png" alt="logo" className="w-full h-full object-cover" />
+        <img src={logo2} alt="logo" className="w-full h-full object-cover" />
       </div>
 
       <div className="row-span-2 bg-gray-200 rounded-lg overflow-hidden">

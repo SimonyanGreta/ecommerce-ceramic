@@ -16,7 +16,7 @@ i18n
     fallbackLng: "en",
     // supportedLngs: ["ru", "en", "hy"],
     backend: {
-      loadPath: "/locales/{{lng}}/{{ns}}.json", // ✅ путь к JSON
+      loadPath: "./locales/{{lng}}/{{ns}}.json", // ✅ путь к JSON
     },
     interpolation: {
       escapeValue: false, // react already safes from xss
