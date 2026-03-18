@@ -35,9 +35,7 @@
     "sort": {
       "featured": "Լռելյայն",
       "priceAsc": "Գին՝ աճման կարգով",
-      "priceDesc": "Գին՝ նվազման կարգով",
-      "nameAsc": "Անուն՝ Ա → Ֆ",
-      "nameDesc": "Անուն՝ Ֆ → Ա"
+      "priceDesc": "Գին՝ նվազման կարգով"
     },
     "filters": {
       "categoryTitle": "Կատեգորիաներ",

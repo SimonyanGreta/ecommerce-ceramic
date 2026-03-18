@@ -13,8 +13,6 @@ const SORT_VALUES = [
   "featured",
   "priceAsc",
   "priceDesc",
-  "nameAsc",
-  "nameDesc",
 ] as const;
 
 const CATEGORY_VALUES = [

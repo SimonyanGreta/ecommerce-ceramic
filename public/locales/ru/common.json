@@ -35,9 +35,7 @@
     "sort": {
       "featured": "По умолчанию",
       "priceAsc": "Цена: по возрастанию",
-      "priceDesc": "Цена: по убыванию",
-      "nameAsc": "Название: А → Я",
-      "nameDesc": "Название: Я → А"
+      "priceDesc": "Цена: по убыванию"
     },
     "filters": {
       "categoryTitle": "Категория",

@@ -33,8 +33,6 @@ export const ShopToolbar = ({
         <option value="featured">{t("shop.sort.featured")}</option>
         <option value="priceAsc">{t("shop.sort.priceAsc")}</option>
         <option value="priceDesc">{t("shop.sort.priceDesc")}</option>
-        <option value="nameAsc">{t("shop.sort.nameAsc")}</option>
-        <option value="nameDesc">{t("shop.sort.nameDesc")}</option>
       </select>
     </div>
   );

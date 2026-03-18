@@ -3,9 +3,7 @@ import type { Product, ProductCategory } from "../../types/product";
 export type ProductsSort =
   | "featured"
   | "priceAsc"
-  | "priceDesc"
-  | "nameAsc"
-  | "nameDesc";
+  | "priceDesc";
 
 export type ProductsListParams = {
   q?: string;

@@ -45,12 +45,6 @@ const applySort = (items: Product[], sort?: ProductsListParams["sort"]) => {
     case "priceDesc":
       arr.sort((a, b) => b.price - a.price);
       break;
-    case "nameAsc":
-      arr.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "nameDesc":
-      arr.sort((a, b) => b.name.localeCompare(a.name));
-      break;
     case "featured":
     default:
       break;
