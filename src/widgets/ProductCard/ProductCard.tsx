@@ -5,6 +5,7 @@ import type { Product } from "../../types/product.ts";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money.ts";
 import { Button } from "../../ui/components/Button";
+import billet from "../../assets/images/logoBalvanka.png";
 
 type ProductCardProps = { product: Product };
 
@@ -23,7 +24,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         aria-label={t("product.viewMore")}
       >
         <img
-          src={product.image}
+          src={product.image !== "img" ? product.image : billet}
           alt={product.name}
           className="h-full object-contain transform group-hover:scale-150 transition duration-500"
         />

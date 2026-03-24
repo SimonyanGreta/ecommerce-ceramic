@@ -4,6 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // base: "/ecommerce-ceramic/",
+  // base: "/ecommerce-ceramic/", // раскомитить для деплоя github-io
   plugins: [react(), tailwindcss()],
 });

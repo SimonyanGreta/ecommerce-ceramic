@@ -5,6 +5,7 @@ import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { Button } from "../../ui/components/Button";
 import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money";
+import billet from "../../assets/images/logoBalvanka.png";
 
 type Props = { item: TCartItem };
 
@@ -15,7 +16,7 @@ export const CartItem = memo(({ item }: Props) => {
   return (
     <div className="flex gap-3 py-3 border-b border-black/10">
       <img
-        src={item.image}
+        src={item.image !== "img" ? item.image : billet}
         alt={item.name}
         className="w-16 h-16 object-cover rounded-xl"
       />

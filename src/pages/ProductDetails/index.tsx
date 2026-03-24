@@ -12,6 +12,7 @@ import { BackButton } from "../../widgets/BackButton";
 import { Button } from "../../ui/components/Button";
 import { formatMoney } from "../../helpers/money";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
+import billet from "../../assets/images/logoBalvanka.png";
 
 export const ProductDetails = () => {
   const { t, i18n } = useTranslation();
@@ -65,7 +66,7 @@ export const ProductDetails = () => {
           </div>
 
           <img
-            src={product.image}
+            src={product.image !== "img" ? product.image : billet}
             alt={product.name}
             className="w-full max-h-120 object-contain"
           />
