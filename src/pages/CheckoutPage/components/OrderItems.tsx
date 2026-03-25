@@ -1,6 +1,7 @@
 import { formatMoney } from "../../../helpers/money.ts";
 import { useTranslation } from "react-i18next";
 import type { CartItem } from "../../../types/product.ts";
+import billet from "../../../assets/images/logoBalvanka.png";
 
 type Props = {
   items: CartItem[];
@@ -23,7 +24,7 @@ export function OrderItems({ items }: Props) {
               className="flex items-center gap-3 rounded-xl border border-black/5 p-3"
             >
               <img
-                src={it.image}
+                src={it.image !== "img" ? it.image : billet}
                 className="w-12 h-12 object-cover rounded-lg"
                 alt={it.name}
               />
