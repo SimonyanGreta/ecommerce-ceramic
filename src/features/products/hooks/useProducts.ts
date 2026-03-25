@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import type {
   ProductsListParams,
   ProductsListResponse,
 } from "../../../services/products/products.api";
 import { productsApi } from "../../../services/products";
+import { normalizeLanguage } from "../../../helpers/language";
 
 type State = {
   data: ProductsListResponse | null;
@@ -11,7 +14,10 @@ type State = {
   error: string | null;
 };
 
+
 export const useProducts = (params: ProductsListParams) => {
+  const { i18n } = useTranslation();
+
   const [state, setState] = useState<State>({
     data: null,
     loading: true,
@@ -21,6 +27,11 @@ export const useProducts = (params: ProductsListParams) => {
   const categoriesKey = useMemo(
     () => (params.categories ?? []).slice().sort().join(","),
     [params.categories],
+  );
+
+  const currentLanguage = useMemo(
+    () => normalizeLanguage(i18n.resolvedLanguage || i18n.language),
+    [i18n.resolvedLanguage, i18n.language],
   );
 
   useEffect(() => {
@@ -54,6 +65,7 @@ export const useProducts = (params: ProductsListParams) => {
     categoriesKey,
     params.priceMin,
     params.priceMax,
+    currentLanguage,
   ]);
 
   return state;

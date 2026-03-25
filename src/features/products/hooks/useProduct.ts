@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import type { Product } from "../../../types/product";
 import { productsApi } from "../../../services/products";
+import { normalizeLanguage } from "../../../helpers/language";
 
 type State = {
   product: Product | null;
@@ -8,12 +11,19 @@ type State = {
   error: string | null;
 };
 
-export function useProduct(slug?: string) {
+export const useProduct = (slug?: string) => {
+  const { i18n } = useTranslation();
+
   const [state, setState] = useState<State>({
     product: null,
     loading: !!slug,
     error: null,
   });
+
+  const currentLanguage = useMemo(
+    () => normalizeLanguage(i18n.resolvedLanguage || i18n.language),
+    [i18n.resolvedLanguage, i18n.language],
+  );
 
   useEffect(() => {
     if (!slug) {
@@ -26,9 +36,9 @@ export function useProduct(slug?: string) {
 
     productsApi
       .getBySlug(slug)
-      .then((p) => {
+      .then((product) => {
         if (!alive) return;
-        setState({ product: p, loading: false, error: null });
+        setState({ product, loading: false, error: null });
       })
       .catch((err) => {
         if (!alive) return;
@@ -42,7 +52,7 @@ export function useProduct(slug?: string) {
     return () => {
       alive = false;
     };
-  }, [slug]);
+  }, [slug, currentLanguage]);
 
   return state;
-}
+};
