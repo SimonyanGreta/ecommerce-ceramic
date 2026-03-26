@@ -35,9 +35,7 @@
     "sort": {
       "featured": "Featured",
       "priceAsc": "Price: low → high",
-      "priceDesc": "Price: high → low",
-      "nameAsc": "Name: A → Z",
-      "nameDesc": "Name: Z → A"
+      "priceDesc": "Price: high → low"
     },
     "filters": {
       "categoryTitle": "Category",

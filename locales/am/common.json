@@ -33,18 +33,16 @@
     "title": "Բոլոր ապրանքները",
     "searchPlaceholder": "Որոնել ապրանքներ...",
     "sort": {
-      "featured": "Առաջարկվող",
+      "featured": "Լռելյայն",
       "priceAsc": "Գին՝ աճման կարգով",
-      "priceDesc": "Գին՝ նվազման կարգով",
-      "nameAsc": "Անուն՝ Ա → Ֆ",
-      "nameDesc": "Անուն՝ Ֆ → Ա"
+      "priceDesc": "Գին՝ նվազման կարգով"
     },
     "filters": {
       "categoryTitle": "Կատեգորիաներ",
       "priceTitle": "Գին",
       "priceMin": "Մին.",
       "priceMax": "Մաքս.",
-      "reset": "Վերակայել",
+      "reset": "Մաքրել",
       "button": "Ֆիլտրեր",
       "categories": {
         "cups-mugs": "Բաժակներ և գավաթներ",
@@ -62,7 +60,7 @@
       "subtitle": "Փորձեք փոխել որոնումը կամ տեսակավորումը"
     },
     "actions": {
-      "reset": "Վերակայել"
+      "reset": "Մաքրել"
     }
   },
   "product": {
