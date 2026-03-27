@@ -1,4 +1,4 @@
-import type { ProductCategory } from "../../../types/product";
+import type { CategoryOption, ProductCategory } from "../../../types/product";
 import { CategoryFilter } from "./CategoryFilter";
 import { PriceFilter } from "./PriceFilter";
 import { Button } from "../../../ui/components/Button";
@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
   categories: ProductCategory[];
+  availableCategories: CategoryOption[];
   priceMin?: number;
   priceMax?: number;
 
@@ -18,6 +19,7 @@ type Props = {
 
 export const ShopFilters = ({
   categories,
+  availableCategories,
   priceMin,
   priceMax,
   onCategoriesChange,
@@ -30,7 +32,11 @@ export const ShopFilters = ({
 
   return (
     <aside className="h-full rounded-2xl bg-white/30 backdrop-blur-md p-2 shadow-sm sm:p-4 space-y-6">
-      <CategoryFilter value={categories} onChange={onCategoriesChange} />
+      <CategoryFilter
+        value={categories}
+        options={availableCategories}
+        onChange={onCategoriesChange}
+      />
 
       <PriceFilter
         priceMin={priceMin}

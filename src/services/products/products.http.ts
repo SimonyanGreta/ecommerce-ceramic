@@ -17,6 +17,18 @@ function qs(params?: ProductsListParams) {
   if (params.page) sp.set("page", String(params.page));
   if (params.pageSize) sp.set("pageSize", String(params.pageSize));
 
+  if (params.categories?.length) {
+    sp.set("categories", params.categories.join(","));
+  }
+
+  if (typeof params.priceMin === "number") {
+    sp.set("priceMin", String(params.priceMin));
+  }
+
+  if (typeof params.priceMax === "number") {
+    sp.set("priceMax", String(params.priceMax));
+  }
+
   const s = sp.toString();
   return s ? `?${s}` : "";
 }

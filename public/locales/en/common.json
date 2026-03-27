@@ -43,14 +43,7 @@
       "priceMin": "Min price",
       "priceMax": "Max price",
       "reset": "Reset filters",
-      "button": "Filters",
-      "categories": {
-        "cups-mugs": "Cups and mugs",
-        "plates-platters": "Plates and platters",
-        "vases": "Vases",
-        "seasoning-containers": "Containers for seasonings",
-        "kettles": "Kettles"
-      }
+      "button": "Filters"
     },
     "loading": "Loading products...",
     "showing": "Showing {{count}} of {{total}}",

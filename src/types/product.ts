@@ -9,6 +9,13 @@ export type ProductCategory =
   | "seasoning-containers"
   | "kettles";
 
+export type CategoryOption = {
+  code: ProductCategory;
+  label: string;
+  sortOrder: number;
+  isActive: boolean;
+};
+
 export type Product = {
   id: ProductId;
   slug: string;

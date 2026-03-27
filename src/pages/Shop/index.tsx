@@ -17,6 +17,7 @@ import { ShopToolbar } from "./components/ShopToolbar";
 import { getActiveFiltersCount } from "../../helpers/shopFilters";
 
 import Filter from "../../assets/icon/filter";
+import { useCategories } from "../../features/products/hooks/useCategories.ts";
 
 export const Shop = () => {
   const { t } = useTranslation();
@@ -64,6 +65,8 @@ export const Shop = () => {
     priceMax,
   });
 
+  const { categories: availableCategories } = useCategories();
+
   useEffect(() => {
     if (!data) return;
     const tp = Math.max(1, Math.ceil(data.total / data.pageSize));
@@ -82,6 +85,7 @@ export const Shop = () => {
         <div className="hidden lg:block">
           <ShopFilters
             categories={categories}
+            availableCategories={availableCategories}
             priceMin={priceMin}
             priceMax={priceMax}
             onCategoriesChange={setCategories}
@@ -177,6 +181,7 @@ export const Shop = () => {
       >
         <ShopFilters
           categories={categories}
+          availableCategories={availableCategories}
           priceMin={priceMin}
           priceMax={priceMax}
           onCategoriesChange={setCategories}

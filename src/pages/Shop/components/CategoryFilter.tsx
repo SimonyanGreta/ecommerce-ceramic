@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next";
-import type { ProductCategory } from "../../../types/product";
-import { SHOP_CATEGORIES } from "../../../constants/categories";
 import { Checkbox } from "../../../ui/components/Checkbox";
+import type { ProductCategory, CategoryOption } from "../../../types/product";
 
 type Props = {
   value: ProductCategory[];
+  options: CategoryOption[];
   onChange: (next: ProductCategory[]) => void;
 };
 
-export const CategoryFilter = ({ value, onChange }: Props) => {
+export const CategoryFilter = ({ value, options, onChange }: Props) => {
   const { t } = useTranslation();
 
   const toggleCategory = (category: ProductCategory) => {
@@ -27,19 +27,16 @@ export const CategoryFilter = ({ value, onChange }: Props) => {
       </h3>
 
       <div className="flex flex-col gap-2">
-        {SHOP_CATEGORIES.map((category) => {
-          const checked = value.includes(category);
-
-          return (
-            <Checkbox
-              key={category}
-              id={`category-${category}`}
-              checked={checked}
-              onChange={() => toggleCategory(category)}
-              label={t(`shop.filters.categories.${category}`)}
-            />
-          );
-        })}
+        {options.map(({ code, isActive, label }) => (
+          <Checkbox
+            key={code}
+            id={`category-${code}`}
+            checked={value.includes(code)}
+            onChange={() => toggleCategory(code)}
+            label={label}
+            disabled={!isActive}
+          />
+        ))}
       </div>
     </div>
   );

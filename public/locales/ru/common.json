@@ -43,14 +43,7 @@
       "priceMin": "Мин. цена",
       "priceMax": "Макс. цена",
       "reset": "Сбросить фильтры",
-      "button": "Фильтры",
-      "categories": {
-        "cups-mugs": "Чашки и кружки",
-        "plates-platters": "Тарелки и блюда",
-        "vases": "Вазы",
-        "seasoning-containers": "Ёмкости для специй",
-        "kettles": "Чайники"
-      }
+      "button": "Фильтры"
     },
     "loading": "Загружаем товары...",
     "showing": "Показано {{count}} из {{total}}",

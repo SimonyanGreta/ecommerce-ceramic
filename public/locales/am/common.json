@@ -43,14 +43,7 @@
       "priceMin": "Մին.",
       "priceMax": "Մաքս.",
       "reset": "Մաքրել",
-      "button": "Ֆիլտրեր",
-      "categories": {
-        "cups-mugs": "Բաժակներ և գավաթներ",
-        "plates-platters": "Ափսեներ և սկուտեղներ",
-        "vases": "Ծաղկամաններ",
-        "seasoning-containers": "Համեմունքի տարաներ",
-        "kettles": "Թեյնիկներ"
-      }
+      "button": "Ֆիլտրեր"
     },
     "loading": "Ապրանքները բեռնվում են...",
     "showing": "Ցուցադրված է {{count}} / {{total}}",
