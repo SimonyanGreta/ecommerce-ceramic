@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { CategoryOption } from "../../../types/product";
 import { metaApi } from "../../../services/meta";
+import { normalizeLanguage } from "../../../helpers/language";
+import { useTranslation } from "react-i18next";
 
 type State = {
   categories: CategoryOption[];
@@ -15,6 +17,13 @@ export const useCategories = () => {
     loading: true,
     error: null,
   });
+
+  const { i18n } = useTranslation();
+
+  const currentLanguage = useMemo(
+    () => normalizeLanguage(i18n.resolvedLanguage || i18n.language),
+    [i18n.resolvedLanguage, i18n.language],
+  );
 
   useEffect(() => {
     let alive = true;
@@ -53,7 +62,7 @@ export const useCategories = () => {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [currentLanguage]);
 
   return state;
 };

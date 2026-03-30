@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useCart } from "../../hooks/useCart";
 import { useCartDrawer } from "../../hooks/useCartDrawer";
 
-// TODO мок. Позже заменишь на fetch
 import { useProduct } from "../../features/products/hooks/useProduct";
 import { ProductDetailsSkeleton } from "../../widgets/ProductDetailsSkeleton";
 import { Breadcrumbs } from "../../widgets/Breadcrumbs";
@@ -46,7 +45,7 @@ export const ProductDetails = () => {
   const breadcrumbItems = [
     { label: t("nav.shop"), to: "/shop" },
     {
-      label: t(`shop.filters.categories.${product.category}`),
+      label: product.categoryLabel,
       to: `/shop?categories=${product.category}`,
     },
     { label: product.name },

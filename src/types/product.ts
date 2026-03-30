@@ -26,6 +26,7 @@ export type Product = {
   image: string;
 
   category: ProductCategory;
+  categoryLabel: string;
 
   // на будущее
   stock?: number;
