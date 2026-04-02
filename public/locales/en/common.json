@@ -63,7 +63,14 @@
     "quantity": "Quantity",
     "addToCart": "Add to cart",
     "freeShipping": "Free worldwide shipping on orders over $100.",
-    "securePayment": "Secure payment via PayPal or credit card."
+    "securePayment": "Secure payment via PayPal or credit card.",
+    "availability": {
+      "inStock": "Only {{stockQty}} In stock",
+      "outOfStock": "Out of stock",
+      "madeToOrder": "Made to order",
+      "unavailable": "Temporarily unavailable"
+    },
+    "unavailableAction": "Unavailable"
   },
   "cart": {
     "title": "Cart",
@@ -86,7 +93,7 @@
     "orderItemsTitle": "Order items",
     "summaryTitle": "Summary",
     "emptyCart": "Your cart is empty.",
-    "placeOrder": "Place order (mock)",
+    "placeOrder": "Place order",
     "placingOrder": "Placing order...",
     "successTitle": "Order placed",
     "successText": "We received your request. We’ll contact you soon to confirm details.",
@@ -114,7 +121,19 @@
       },
       "address": { "required": "Address is required" },
       "city": { "required": "City is required" },
-      "country": { "required": "Country is required" }
+      "country": { "required": "Country is required" },
+      "validation": "Please check the form fields.",
+      "itemsRequired": "Add at least one item to your order.",
+      "productsNotFound": "Some products are no longer available.",
+      "currencyMismatch": "A currency mismatch was detected in the order.",
+      "outOfStock": "Some items are no longer available in the requested quantity. Please review your cart and try again.",
+      "unavailable": "Some items are currently unavailable for order. Please review your cart and try again.",
+      "internal": "An internal error occurred. Please try again later.",
+      "orderFailed": "Failed to place the order.",
+      "itemIssues": {
+        "outOfStock": "Not enough in stock. Requested: {{requested}}, available: {{available}}.",
+        "unavailable": "This item is currently unavailable for order."
+      }
     },
 
     "totals": {

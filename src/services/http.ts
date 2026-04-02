@@ -4,18 +4,24 @@ import { normalizeLanguage } from "../helpers/language";
 export type ApiError = {
   status: number;
   message: string;
-  body?: string;
+  body?: unknown;
 };
 
 type ApiFetchInit = RequestInit & {
   timeoutMs?: number;
 };
 
-async function readTextSafe(res: Response) {
+async function readBodySafe(res: Response): Promise<unknown> {
+  const contentType = res.headers.get("content-type") ?? "";
+
   try {
+    if (contentType.includes("application/json")) {
+      return await res.json();
+    }
+
     return await res.text();
   } catch {
-    return "";
+    return undefined;
   }
 }
 
@@ -43,6 +49,10 @@ export async function apiFetch<T>(
       headers.set("Accept-Language", currentLanguage);
     }
 
+    if (!headers.has("Content-Type") && init?.body) {
+      headers.set("Content-Type", "application/json");
+    }
+
     const res = await fetch(input, {
       ...init,
       signal: controller.signal,
@@ -50,15 +60,20 @@ export async function apiFetch<T>(
     });
 
     if (!res.ok) {
-      const body = await readTextSafe(res);
+      const body = await readBodySafe(res);
+
+      const message =
+        typeof body === "string"
+          ? body
+          : res.statusText || `HTTP ${res.status}`;
 
       const err: ApiError = {
         status: res.status,
-        message: body || res.statusText || `HTTP ${res.status}`,
+        message,
         body,
       };
 
-      throw new Error(`${err.status}: ${err.message}`);
+      throw err;
     }
 
     if (res.status === 204) {

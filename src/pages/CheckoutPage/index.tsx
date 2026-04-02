@@ -10,13 +10,16 @@ import { CartEmpty } from "./components/CartEmpty";
 
 import type { CheckoutErrors, CheckoutForm } from "../../types/checkout";
 import type { CreateOrderPayload } from "../../types/order";
+import type { CheckoutItemIssuesMap } from "../../features/checkout/checkoutIssues";
 
 import { calcOrderTotals } from "../../helpers/checkout";
-import { ordersApi } from "../../services/orders";
 import { validateCheckout } from "../../features/checkout/validation/validateCheckout";
 import { toCheckoutErrors } from "../../features/checkout/validation/mapCheckoutErrors";
+import { mapOrderApiErrorToCheckoutState } from "../../features/checkout/mapOrderApiError";
+
 import { DEFAULT_CURRENCY } from "../../constants/currency";
 import { useCheckoutResultStore } from "../../stores/checkout-result.store";
+import { ordersApi, parseOrderApiError } from "../../services/orders";
 
 const CHECKOUT_DRAFT_KEY = "checkoutDraft:v1";
 
@@ -53,6 +56,7 @@ export const CheckoutPage = () => {
 
   const [errors, setErrors] = useState<CheckoutErrors>({});
   const [placing, setPlacing] = useState(false);
+  const [itemIssues, setItemIssues] = useState<CheckoutItemIssuesMap>({});
 
   useEffect(() => {
     try {
@@ -76,7 +80,7 @@ export const CheckoutPage = () => {
     setForm((prev) => ({ ...prev, [key]: value }));
 
     setErrors((prev) => {
-      const { [key]: _, ...rest } = prev;
+      const { [key]: _removed, form: _form, ...rest } = prev;
       return rest;
     });
   };
@@ -87,6 +91,8 @@ export const CheckoutPage = () => {
   };
 
   const placeOrder = async () => {
+    setItemIssues({});
+
     const nextErrors = validate();
     setErrors(nextErrors);
 
@@ -120,6 +126,14 @@ export const CheckoutPage = () => {
     try {
       const { orderId } = await ordersApi.createOrder(payload);
 
+      if (!orderId) {
+        setErrors({
+          form: t("checkout.errors.orderFailed"),
+        });
+        return;
+      }
+
+      setItemIssues({});
       setLastSuccessOrder({
         orderId,
         createdAt: new Date().toISOString(),
@@ -130,10 +144,18 @@ export const CheckoutPage = () => {
 
       navigate("/checkout/success", { replace: true });
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      alert(msg);
-      // TODO сделать правильную обработку после подключения бекенда
-      // setErrors({ form: msg || t("checkout.errors.orderFailed") });
+      const apiError = parseOrderApiError(err);
+
+      if (apiError) {
+        const nextState = mapOrderApiErrorToCheckoutState(t, apiError);
+        setErrors(nextState.errors);
+        setItemIssues(nextState.itemIssues);
+        return;
+      }
+
+      setErrors({
+        form: t("checkout.errors.orderFailed"),
+      });
     } finally {
       setPlacing(false);
     }
@@ -147,6 +169,12 @@ export const CheckoutPage = () => {
     <div className="container mx-auto px-4 py-28">
       <h1 className="text-xl font-semibold">{t("checkout.title")}</h1>
 
+      {errors.form && (
+        <div className="mt-4 rounded-2xl border border-danger-border bg-danger-soft px-4 py-3 text-sm text-danger-text">
+          {errors.form}
+        </div>
+      )}
+
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         <ShippingForm
           form={form}
@@ -156,7 +184,7 @@ export const CheckoutPage = () => {
         />
 
         <div className="space-y-6">
-          <OrderItems items={items} />
+          <OrderItems items={items} issuesByProductId={itemIssues} />
 
           <OrderSummary
             subtotal={subtotal}

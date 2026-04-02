@@ -16,6 +16,11 @@ export type CategoryOption = {
   isActive: boolean;
 };
 
+export type ProductAvailabilityStatus =
+  | "in_stock"
+  | "made_to_order"
+  | "unavailable";
+
 export type Product = {
   id: ProductId;
   slug: string;
@@ -28,8 +33,9 @@ export type Product = {
   category: ProductCategory;
   categoryLabel: string;
 
-  // на будущее
-  stock?: number;
+  availabilityStatus: ProductAvailabilityStatus;
+  stockQty: number;
+
   attributes?: Record<string, string | number | boolean>;
 };
 

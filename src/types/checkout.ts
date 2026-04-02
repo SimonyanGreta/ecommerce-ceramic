@@ -8,4 +8,6 @@ export type CheckoutForm = {
   notes: string;
 };
 
-export type CheckoutErrors = Partial<Record<keyof CheckoutForm, string>>;
+export type CheckoutErrors = Partial<Record<keyof CheckoutForm, string>> & {
+  form?: string;
+};

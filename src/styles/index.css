@@ -35,6 +35,22 @@ body {
   /*--color-accent: #ecac00;*/
   /*--color-accent: #efb1bc;*/
   --color-accent: #ffa500ed;
+
+  --color-success-soft: #e8f3eb;
+  --color-success-text: #2f6b3f;
+  --color-success-border: #b9d8c2;
+
+  --color-warning-soft: #f8f0dc;
+  --color-warning-text: #9a6a00;
+  --color-warning-border: #e7cd8a;
+
+  --color-muted-soft: #ebe9e7;
+  --color-muted-text: #6f6a66;
+  --color-muted-border: #d2cdca;
+
+  --color-danger-soft: #f9e6e4;
+  --color-danger-text: #a33a32;
+  --color-danger-border: #e8b3ae;
 }
 
 :root {

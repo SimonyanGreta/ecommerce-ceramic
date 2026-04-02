@@ -12,6 +12,11 @@ import { Button } from "../../ui/components/Button";
 import { formatMoney } from "../../helpers/money";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import billet from "../../assets/images/logoBalvanka.png";
+import {
+  canAddToCart,
+  getAvailabilityBadgeClassName,
+  getAvailabilityLabel,
+} from "../../helpers/productAvailability.ts";
 
 export const ProductDetails = () => {
   const { t, i18n } = useTranslation();
@@ -28,7 +33,7 @@ export const ProductDetails = () => {
 
   if (error) {
     return (
-      <div className="py-28 container mx-auto px-4 text-center text-red-700">
+      <div className="container mx-auto px-4 py-28 text-center text-red-700">
         {error}
       </div>
     );
@@ -36,11 +41,24 @@ export const ProductDetails = () => {
 
   if (!product) {
     return (
-      <div className="py-28 container mx-auto px-4 text-center opacity-70">
+      <div className="container mx-auto px-4 py-28 text-center opacity-70">
         {t("product.notFound")}
       </div>
     );
   }
+
+  const isAddToCartDisabled = !canAddToCart(product);
+
+  const availabilityLabel = getAvailabilityLabel(
+    t,
+    product.availabilityStatus,
+    product.stockQty,
+  );
+
+  const availabilityClassName = getAvailabilityBadgeClassName(
+    product.availabilityStatus,
+    product.stockQty,
+  );
 
   const breadcrumbItems = [
     { label: t("nav.shop"), to: "/shop" },
@@ -53,13 +71,13 @@ export const ProductDetails = () => {
 
   return (
     <div className="container mx-auto px-4 py-28">
-      <div className="mb-6 hidden md:flex items-center gap-3">
+      <div className="mb-6 hidden items-center gap-3 md:flex">
         <BackButton />
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3 lg:gap-10">
-        <div className="relative rounded-2xl overflow-hidden bg-white shadow-lg flex items-center justify-center">
+        <div className="relative flex items-center justify-center overflow-hidden rounded-2xl bg-white shadow-lg">
           <div className="absolute left-3 top-3 z-10 md:hidden">
             <BackButton />
           </div>
@@ -67,11 +85,11 @@ export const ProductDetails = () => {
           <img
             src={product.image !== "img" ? product.image : billet}
             alt={product.name}
-            className="w-full max-h-120 object-contain"
+            className="max-h-120 w-full object-contain"
           />
         </div>
 
-        <div className="lg:col-span-2 grid gap-8 md:grid-cols-12 md:items-start">
+        <div className="grid gap-8 md:grid-cols-12 md:items-start lg:col-span-2">
           <div className="flex flex-col md:col-span-7">
             <h1 className="text-3xl font-semibold text-background-dark">
               {product.name}
@@ -81,13 +99,17 @@ export const ProductDetails = () => {
               {product.description}
             </p>
 
-            <div className="mt-6 border-t border-primary/20 pt-4 text-sm text-secondary opacity-80 space-y-1">
+            <div className="mt-4">
+              <span className={availabilityClassName}>{availabilityLabel}</span>
+            </div>
+
+            <div className="mt-6 space-y-1 border-t border-primary/20 pt-4 text-sm text-secondary opacity-80">
               <p>{t("product.freeShipping")}</p>
               <p>{t("product.securePayment")}</p>
             </div>
           </div>
 
-          <div className="md:col-span-5 rounded-2xl border border-accent/20 bg-main shadow-lg backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-accent/20 bg-main p-5 shadow-lg backdrop-blur-sm md:col-span-5">
             <div className="flex items-center justify-between gap-4">
               <div className="text-xl font-semibold text-primary">
                 {formatMoney(product.price, product.currency, i18n.language)}
@@ -105,17 +127,20 @@ export const ProductDetails = () => {
               variant="primary"
               size="md"
               fullWidth
+              disabled={isAddToCartDisabled}
               className="mt-4"
               onClick={() => {
                 add(product, qty);
                 openCart();
               }}
-              aria-label="Add to cart"
+              aria-label={t("product.addToCart")}
             >
-              {t("product.addToCart")}
+              {isAddToCartDisabled
+                ? t("product.unavailableAction")
+                : t("product.addToCart")}
             </Button>
 
-            <div className="mt-3 text-sm text-secondary opacity-70 flex items-center justify-between">
+            <div className="mt-3 flex items-center justify-between text-sm text-secondary opacity-70">
               <span>{t("cart.summary.subtotal")}</span>
               <span className="font-semibold text-background-dark">
                 {formatMoney(
