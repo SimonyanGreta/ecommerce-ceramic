@@ -4,6 +4,7 @@ import cupImg from "../../assets/images/cup0.jpg";
 import processImg from "../../assets/images/mix0.jpg";
 import craftImg from "../../assets/images/stand.jpg";
 
+// TODO remove after release
 export const ABOUT_MOCK: Record<string, AboutResponse> = {
   en: {
     heroTitle: "About Nuard Ceramics",

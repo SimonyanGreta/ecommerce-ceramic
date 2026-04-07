@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { useAbout } from "../../features/about/useAbout";
 import { AboutSection } from "./components/AboutSection";
 import { AboutSectionSkeleton } from "./components/AboutSectionSkeleton.tsx";
@@ -6,9 +5,7 @@ import { Info } from "../../widgets/Info";
 import { LocationMap } from "../../widgets/LocationMap";
 
 export const About = () => {
-  const { i18n } = useTranslation();
-
-  const { data, loading } = useAbout(i18n.language);
+  const { data, loading } = useAbout();
 
   if (loading || !data) {
     return (

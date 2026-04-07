@@ -1,11 +1,10 @@
 import type { AboutResponse } from "./about.types";
-import { ABOUT_MOCK } from "./about.mock";
+import { apiFetch } from "../http";
 
-export const getAbout = async (lang: string): Promise<AboutResponse> => {
-  // имитация сети
-  await new Promise((r) => setTimeout(r, 200));
+const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
-  return ABOUT_MOCK[lang] ?? ABOUT_MOCK.en;
-  // TODO исправить после добавления бекенда
-  // return fetch(`/api/about?lang=${lang}`).then((r) => r.json());
+export const getAbout = async (): Promise<AboutResponse> => {
+  return apiFetch<AboutResponse>(`${API_BASE}/content/about`, {
+    method: "GET",
+  });
 };
