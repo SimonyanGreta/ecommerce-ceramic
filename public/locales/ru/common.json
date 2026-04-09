@@ -65,8 +65,8 @@
     "freeShipping": "Бесплатная доставка по миру при заказе от $100.",
     "securePayment": "Безопасная оплата PayPal или картой.",
     "availability": {
-      "inStock": "В наличии всего {{stockQty}}",
-      "outOfStock": "Нет в наличии",
+      "inStock": "В наличии",
+      "inStockLow": "Осталось {{stockQty}} шт.",
       "madeToOrder": "Под заказ",
       "unavailable": "Временно недоступно"
     },

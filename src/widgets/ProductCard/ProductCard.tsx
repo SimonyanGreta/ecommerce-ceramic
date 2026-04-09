@@ -31,7 +31,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const availabilityClassName = getAvailabilityBadgeClassName(
     product.availabilityStatus,
-    product.stockQty,
   );
 
   return (

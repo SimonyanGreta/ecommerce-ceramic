@@ -65,8 +65,8 @@
     "freeShipping": "Անվճար առաքում ամբողջ աշխարհում $100-ից բարձր պատվերների դեպքում։",
     "securePayment": "Ապահով վճարում PayPal-ով կամ քարտով։",
     "availability": {
-      "inStock": "Առկա է {{stockQty}} հատ",
-      "outOfStock": "Առկա չէ",
+      "inStock": "Առկա է",
+      "inStockLow": "Առկա է {{stockQty}} հատ",
       "madeToOrder": "Պատվերով",
       "unavailable": "Ժամանակավորապես անհասանելի է"
     },

@@ -65,8 +65,8 @@
     "freeShipping": "Free worldwide shipping on orders over $100.",
     "securePayment": "Secure payment via PayPal or credit card.",
     "availability": {
-      "inStock": "Only {{stockQty}} In stock",
-      "outOfStock": "Out of stock",
+      "inStock": "In stock",
+      "inStockLow": "Only {{stockQty}} left",
       "madeToOrder": "Made to order",
       "unavailable": "Temporarily unavailable"
     },

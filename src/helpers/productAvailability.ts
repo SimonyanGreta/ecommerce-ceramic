@@ -14,14 +14,15 @@ export const getAvailabilityLabel = (
     return t("product.availability.unavailable");
   }
 
-  return stockQty > 0
-    ? t("product.availability.inStock", { stockQty })
-    : t("product.availability.outOfStock");
+  if (stockQty < 5) {
+    return t("product.availability.inStockLow", { stockQty });
+  }
+
+  return t("product.availability.inStock");
 };
 
 export const getAvailabilityTone = (
   availabilityStatus: ProductAvailabilityStatus,
-  stockQty: number,
 ) => {
   if (availabilityStatus === "made_to_order") {
     return "warning" as const;
@@ -31,17 +32,16 @@ export const getAvailabilityTone = (
     return "muted" as const;
   }
 
-  return stockQty > 0 ? ("success" as const) : ("muted" as const);
+  return "success" as const;
 };
 
 export const getAvailabilityBadgeClassName = (
   availabilityStatus: ProductAvailabilityStatus,
-  stockQty: number,
 ) => {
   const base =
     "inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium";
 
-  const tone = getAvailabilityTone(availabilityStatus, stockQty);
+  const tone = getAvailabilityTone(availabilityStatus);
 
   if (tone === "success") {
     return `${base} border-success-border bg-success-soft text-success-text`;

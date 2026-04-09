@@ -57,7 +57,6 @@ export const ProductDetails = () => {
 
   const availabilityClassName = getAvailabilityBadgeClassName(
     product.availabilityStatus,
-    product.stockQty,
   );
 
   const breadcrumbItems = [
