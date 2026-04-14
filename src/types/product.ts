@@ -41,9 +41,5 @@ export type Product = {
 
 export type CartItem = {
   productId: ProductId;
-  name: string;
-  price: number;
-  currency: MoneyCurrency;
-  image: string;
   qty: number;
 };

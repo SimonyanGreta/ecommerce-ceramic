@@ -1,13 +1,13 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { useCart } from "../../hooks/useCart";
-import type { CartItem as TCartItem } from "../../types/product";
 import { QuantitySelector } from "../../ui/components/QuantitySelector";
 import { Button } from "../../ui/components/Button";
-import { useTranslation } from "react-i18next";
 import { formatMoney } from "../../helpers/money";
+import type { CartViewItem } from "../../types/cart";
 import billet from "../../assets/images/logoBalvanka.png";
 
-type Props = { item: TCartItem };
+type Props = { item: CartViewItem };
 
 export const CartItem = memo(({ item }: Props) => {
   const { setQty, remove } = useCart();

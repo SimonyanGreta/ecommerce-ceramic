@@ -11,8 +11,6 @@ type CartState = {
   items: Record<string, CartItem>; // productId => item
   currency: MoneyCurrency;
   updatedAt: number | null;
-  // служебное для будущей синхронизации
-  pendingSync: boolean;
   version: number; // на будущее для миграций
 };
 
@@ -25,18 +23,16 @@ type CartActions = {
   // будущая интеграция:
   hydrateFromServer: (serverItems: CartItem[]) => void; // замена локально
   mergeFromServer: (serverItems: CartItem[]) => void; // merge-политика
-  markSync: (pending: boolean) => void;
 };
 
 type CartStore = CartState & CartActions;
 
-const CART_PERSIST_KEY = "cart:v1";
+const CART_PERSIST_KEY = "cart:v2";
 
 const initialState: Omit<CartStore, keyof CartActions> = {
   items: {},
   currency: DEFAULT_CURRENCY,
   updatedAt: null,
-  pendingSync: false,
   version: 1,
 };
 
@@ -50,20 +46,16 @@ export const useCartStore = create<CartStore>()(
           set((state) => {
             const existing = state.items[product.id];
             const nextQty = (existing?.qty ?? 0) + qty;
+
             return {
               items: {
                 ...state.items,
                 [product.id]: {
                   productId: product.id,
-                  name: product.name,
-                  price: product.price,
-                  currency: product.currency,
-                  image: product.image,
                   qty: nextQty,
                 },
               },
               updatedAt: Date.now(),
-              pendingSync: true,
             };
           });
         },
@@ -71,7 +63,7 @@ export const useCartStore = create<CartStore>()(
         remove: (productId) => {
           set((state) => {
             const { [productId]: _, ...rest } = state.items;
-            return { items: rest, updatedAt: Date.now(), pendingSync: true };
+            return { items: rest, updatedAt: Date.now() };
           });
         },
 
@@ -86,7 +78,6 @@ export const useCartStore = create<CartStore>()(
             return {
               items: { ...state.items, [productId]: { ...it, qty } },
               updatedAt: Date.now(),
-              pendingSync: true,
             };
           });
         },
@@ -97,7 +88,7 @@ export const useCartStore = create<CartStore>()(
         hydrateFromServer: (serverItems) => {
           const map: Record<string, CartItem> = {};
           for (const it of serverItems) map[it.productId] = it;
-          set({ items: map, updatedAt: Date.now(), pendingSync: false });
+          set({ items: map, updatedAt: Date.now() });
         },
 
         // будущий API: merge (сейчас политика: max qty)
@@ -110,10 +101,9 @@ export const useCartStore = create<CartStore>()(
               ? { ...local, qty: Math.max(local.qty, s.qty) }
               : s;
           }
-          set({ items: merged, updatedAt: Date.now(), pendingSync: false });
+          set({ items: merged, updatedAt: Date.now() });
         },
 
-        markSync: (pending) => set({ pendingSync: pending }),
       }),
       {
         name: CART_PERSIST_KEY,
@@ -123,9 +113,8 @@ export const useCartStore = create<CartStore>()(
           currency: state.currency,
           updatedAt: state.updatedAt,
           version: state.version,
-          // pendingSync не сохраняем
         }),
-        version: 1,
+        version: 2,
         migrate: (persisted) => persisted as CartState,
       },
     ),

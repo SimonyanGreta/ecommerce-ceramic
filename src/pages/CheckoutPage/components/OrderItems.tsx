@@ -1,11 +1,11 @@
 import { formatMoney } from "../../../helpers/money.ts";
 import { useTranslation } from "react-i18next";
-import type { CartItem } from "../../../types/product.ts";
 import type { CheckoutItemIssuesMap } from "../../../features/checkout/checkoutIssues";
+import type { CartViewItem } from "../../../types/cart";
 import billet from "../../../assets/images/logoBalvanka.png";
 
 type Props = {
-  items: CartItem[];
+  items: CartViewItem[];
   issuesByProductId?: CheckoutItemIssuesMap;
 };
 

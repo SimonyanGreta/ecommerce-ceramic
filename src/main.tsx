@@ -5,9 +5,6 @@ import "./styles/index.css";
 import "./config/i18n.js";
 
 import App from "./app/App.tsx";
-import { initCartSync } from "./config/cartSync.ts";
-
-initCartSync();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
