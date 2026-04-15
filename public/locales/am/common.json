@@ -82,6 +82,9 @@
       "checkout": "Պատվիրել",
       "clear": "Մաքրել",
       "subtotal": "Միջանկյալ գումար"
+    },
+    "item": {
+      "exceedsStock": "Առկա է {{stockQty}} հատ"
     }
   },
   "common": {

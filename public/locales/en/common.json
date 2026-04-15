@@ -82,6 +82,9 @@
       "checkout": "Checkout",
       "clear": "Clear",
       "subtotal": "Subtotal"
+    },
+    "item": {
+      "exceedsStock": "Only {{stockQty}} left"
     }
   },
   "common": {

@@ -82,6 +82,9 @@
       "checkout": "Оформить",
       "clear": "Очистить",
       "subtotal": "Подытог"
+    },
+    "item": {
+      "exceedsStock": "Только {{stockQty}} осталось"
     }
   },
   "common": {
